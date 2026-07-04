@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://igc.tskool.kr/sitemap.xml
