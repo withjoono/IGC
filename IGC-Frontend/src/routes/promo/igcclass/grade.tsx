@@ -12,7 +12,7 @@ function GradeClass() {
   return (
     <>
       <Seo title="IGC반 성적관리 · 생기북·모고모고" description="생기북으로 생기부·전공적합성 관리, 모고모고로 모의고사 성적 추이 추적. IGC 정성·정량 평가에 맞춘 성적관리반." path="/promo/igcclass/grade" />
-      <PageHeader badge="IGC반 · 성적관리 · 유료" title="성적관리 · 생기북·모고모고" desc="IGC 홀리스틱 리뷰에 대비해 기록(정성)과 성적 추이(정량)를 함께 관리합니다." />
+      <PageHeader badge="IGC반 · 성적관리 · 유료" title="성적관리 · 생기북·모고모고" desc="성적 하나가 아니라 학생 전체를 보는 IGC 평가에 대비해 기록(정성)과 성적 추이(정량)를 함께 관리합니다." />
 
       <section className="container">
         <div className="rounded-2xl border bg-slate-50 p-6">

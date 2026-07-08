@@ -21,7 +21,7 @@ function Consulting() {
         <StatBand items={[
           { value: "4개 대학", label: "전형 전담 분석" },
           { value: "1:1", label: "맞춤 컨설팅" },
-          { value: "정성+정량", label: "홀리스틱 대응" },
+          { value: "정성+정량", label: "학생 전체 평가 대응" },
           { value: "마감까지", label: "원서 동행" },
         ]} />
       </section>
@@ -45,7 +45,13 @@ function Consulting() {
         </div>
       </section>
 
-      <section className="container mt-14">
+      <section className="container mt-14 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border-2 border-igc-blue/20 bg-igc-blue/5 p-8">
+          <SectionHead eyebrow="COST" title="컨설팅 비용은?" desc="첫 대학 98만원 / 추가 대학당 48만원. 전형 설계부터 원서 제출까지 전략적 대행." />
+          <Link to="/promo/pricing" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
+            비용·대행 범위 자세히 보기 <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
         <div className="rounded-2xl border bg-slate-50 p-8">
           <SectionHead eyebrow="WHY IGC반" title="꾸준한 관리가 필요하다면, IGC반" desc="일회성 상담을 넘어 학습·성적을 매달 관리받고 싶다면 유료 IGC반으로 연결됩니다." />
           <Link to="/promo/igcclass" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">

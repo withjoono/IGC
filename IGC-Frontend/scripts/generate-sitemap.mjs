@@ -1,7 +1,7 @@
 // 빌드 전/후 sitemap.xml 생성: node scripts/generate-sitemap.mjs
 import { writeFileSync } from "node:fs";
 
-const BASE = process.env.SITE_URL || "https://igc.tskool.kr";
+const BASE = process.env.SITE_URL || "https://tigc.kr";
 const unis = ["ghent", "sbu", "utah", "gmu"];
 const blog = ["naesin-5-igc", "igc-2027-deadlines"];
 
@@ -10,8 +10,11 @@ const routes = [
   "/promo/universities",
   ...unis.map((u) => `/promo/universities/${u}`),
   "/promo/deadlines",
+  "/promo/parallel",
+  "/promo/pricing",
   "/promo/diagnosis",
   "/promo/english",
+  "/promo/apps",
   "/promo/blog",
   ...blog.map((b) => `/promo/blog/${b}`),
   "/promo/consulting",

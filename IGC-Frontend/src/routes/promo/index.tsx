@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarClock, GraduationCap, Globe2, Sparkles, CalendarCheck, LineChart } from "lucide-react";
+import { ArrowRight, CalendarClock, GraduationCap, Globe2, Sparkles, CalendarCheck, LineChart, ShieldCheck, PackageCheck, Phone } from "lucide-react";
 import { Seo } from "@/components/seo";
 import { ConsultCTA } from "@/components/layout";
 import { StatBand } from "@/components/ui";
@@ -30,16 +30,16 @@ function Landing() {
       <section className="bg-gradient-to-b from-slate-50 to-white">
         <div className="container py-16 md:py-24">
           <div className="inline-flex items-center gap-2 rounded-full bg-igc-blue/10 px-3 py-1 text-sm text-igc-blue">
-            <Sparkles className="h-4 w-4" /> 송도 글로벌 명문대 입시, 정보부터 합격까지
+            <Sparkles className="h-4 w-4" /> 학생은 수능만, 입시는 우리가 다
           </div>
           <h1 className="mt-5 text-4xl font-bold leading-tight text-igc-navy md:text-5xl">
-            내신이 전부가 아닙니다.
+            학생은 <span className="text-igc-blue">수능만</span> 준비하세요.
             <br />
-            IGC는 <span className="text-igc-blue">가능성</span>을 봅니다.
+            나머지 입시는 우리가 다 합니다.
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-            수능이 아닌 성장과 적합성으로 평가하는 인천글로벌캠퍼스. 4개 대학 전형·2027 마감일·합격 전략을 한곳에서 확인하고,
-            T스쿨 데이터 컨설팅으로 합격까지 동행합니다.
+            IGC는 수시 6회에 안 걸리는 보험 한 장 — 미리 들어두고 수시는 소신 지원하세요.
+            어학 성적이 없어도 수능영어·Versant 하나면 되고, 전형 선택부터 생기부·에세이·원서·마감까지 전부 대행합니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/promo/consult" className="inline-flex items-center gap-2 rounded-lg bg-igc-blue px-6 py-3 font-semibold text-white hover:bg-igc-navy">
@@ -49,16 +49,51 @@ function Landing() {
               1분 합격 가능성 진단
             </Link>
           </div>
+          <a href="tel:01025187139" className="mt-5 inline-flex items-center gap-2 text-lg font-bold text-igc-navy">
+            <Phone className="h-5 w-5 text-igc-blue" /> 상담 전화 <span className="text-igc-blue">010-2518-7139</span>
+          </a>
         </div>
       </section>
 
       <section className="container -mt-6">
         <StatBand items={[
-          { value: "4개 대학", label: "IGC 전형 분석" },
-          { value: "2027", label: "원서 마감 총정리" },
-          { value: "내신 4·5등급", label: "합격 전략" },
-          { value: "T스쿨 앱", label: "학습·성적 관리" },
+          { value: "올인원", label: "전 과정 대행" },
+          { value: "수시 6회 밖", label: "보험 한 장" },
+          { value: "어학 6경로", label: "점수 없어도 OK" },
+          { value: "학습·성적", label: "매달 관리" },
         ]} />
+      </section>
+
+      {/* 3대 강점 */}
+      <section className="container py-14">
+        <div className="text-center">
+          <p className="text-sm font-semibold text-igc-blue">WHY T스쿨 IGC</p>
+          <h2 className="mt-1 text-2xl font-bold text-igc-navy md:text-3xl">맡기면 끝나는, 세 가지 이유</h2>
+          <p className="mt-2 text-muted-foreground">경쟁사는 원서 대행에서 끝납니다. 우리는 편리·실력·안전을 모두 드립니다.</p>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <Link to="/promo/english" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-blue/5 to-white p-6 transition hover:border-igc-blue hover:shadow-md">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-blue/10 text-igc-blue"><PackageCheck className="h-5 w-5" /></div>
+            <p className="mt-4 text-xs font-semibold text-igc-blue">① 올인원 완전 대행</p>
+            <h3 className="mt-1 text-lg font-bold text-igc-navy">학생은 공부만 하세요</h3>
+            <p className="mt-2 text-sm text-muted-foreground">전형 선택·어학 최소경로·생기부·에세이·원서·마감까지 전부 대행. 영어 점수 없어도 6가지 길.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-blue group-hover:gap-2">올인원 서비스 <ArrowRight className="h-3.5 w-3.5" /></span>
+          </Link>
+          <Link to="/promo/igcclass" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-mint/5 to-white p-6 transition hover:border-igc-mint hover:shadow-md">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-mint/15 text-igc-mint"><LineChart className="h-5 w-5" /></div>
+            <p className="mt-4 text-xs font-semibold text-igc-mint">② 학습·성적 관리 병행</p>
+            <h3 className="mt-1 text-lg font-bold text-igc-navy">상담으로 끝내지 않습니다</h3>
+            <p className="mt-2 text-sm text-muted-foreground">스터디플래너·생기북·모고모고로 학습과 성적을 매달 관리 — 합격을 '빌드'합니다.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-mint group-hover:gap-2">IGC반 보기 <ArrowRight className="h-3.5 w-3.5" /></span>
+          </Link>
+          <Link to="/promo/parallel" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-navy/5 to-white p-6 transition hover:border-igc-navy hover:shadow-md">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-navy/10 text-igc-navy"><ShieldCheck className="h-5 w-5" /></div>
+            <p className="mt-4 text-xs font-semibold text-igc-navy">③ 국내 수시 병행</p>
+            <h3 className="mt-1 text-lg font-bold text-igc-navy">수시 6회 밖 보험 한 장</h3>
+            <p className="mt-2 text-sm text-muted-foreground">IGC는 수시 6장에 안 들어갑니다. 보험 미리 확보하고 수시는 소신 지원하세요.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-navy group-hover:gap-2">수시 병행 전략 <ArrowRight className="h-3.5 w-3.5" /></span>
+          </Link>
+        </div>
       </section>
 
       <section className="container py-14">

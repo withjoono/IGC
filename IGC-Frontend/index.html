@@ -21,6 +21,16 @@
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
+    <script>
+      // 구 Firebase 기본 도메인 접속 시 정식 도메인(tigc.kr)으로 리다이렉트.
+      // Firebase Hosting은 커스텀 도메인/기본 도메인을 firebase.json에서 구분할 수 없어 클라이언트에서 처리.
+      (function () {
+        var legacyHosts = ["igc-front.web.app", "igc-front.firebaseapp.com"];
+        if (legacyHosts.indexOf(location.hostname) !== -1) {
+          location.replace("https://tigc.kr" + location.pathname + location.search + location.hash);
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

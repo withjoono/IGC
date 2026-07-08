@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Header, Footer } from "@/components/layout";
+import { Header, Footer, FloatingCall } from "@/components/layout";
 
 function ScrollToTop() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -18,6 +18,7 @@ export const Route = createRootRoute({
       <main className="flex-1">
         <Outlet />
       </main>
+      <FloatingCall />
       <Footer />
     </div>
   ),
