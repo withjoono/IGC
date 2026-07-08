@@ -23,7 +23,7 @@ function Landing() {
     <>
       <Seo
         title="인천글로벌캠퍼스(IGC) 입시 정보·컨설팅"
-        description="IGC 4개 대학(스토니브룩·유타·조지메이슨·겐트) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, 유료 IGC반."
+        description="IGC 4개 대학(스토니브룩·유타·조지메이슨·겐트) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, IGC 멘토링."
         path="/promo"
       />
 
@@ -82,9 +82,9 @@ function Landing() {
           <Link to="/promo/igcclass" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-mint/5 to-white p-6 transition hover:border-igc-mint hover:shadow-md">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-mint/15 text-igc-mint"><LineChart className="h-5 w-5" /></div>
             <p className="mt-4 text-xs font-semibold text-igc-mint">② 학습·성적 관리 병행</p>
-            <h3 className="mt-1 text-lg font-bold text-igc-navy">상담으로 끝내지 않습니다</h3>
-            <p className="mt-2 text-sm text-muted-foreground">스터디플래너·생기북·모고모고로 학습과 성적을 매달 관리 — 합격을 '빌드'합니다.</p>
-            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-mint group-hover:gap-2">IGC반 보기 <ArrowRight className="h-3.5 w-3.5" /></span>
+            <h3 className="mt-1 text-lg font-bold text-igc-navy">멘토가 매주 관리합니다</h3>
+            <p className="mt-2 text-sm text-muted-foreground">멘토가 스터디플래너로 IGC 준비를, 생기북 앱으로 교과·생기부를 관리 — 합격을 '빌드'합니다.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-mint group-hover:gap-2">IGC 멘토링 보기 <ArrowRight className="h-3.5 w-3.5" /></span>
           </Link>
           <Link to="/promo/parallel" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-navy/5 to-white p-6 transition hover:border-igc-navy hover:shadow-md">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-navy/10 text-igc-navy"><ShieldCheck className="h-5 w-5" /></div>
@@ -137,26 +137,26 @@ function Landing() {
         <div className="mt-4"><Link to="/promo/deadlines" className="text-sm font-medium text-igc-blue hover:underline">전체 마감일 캘린더 →</Link></div>
       </section>
 
-      {/* IGC반 (유료) 티저 */}
+      {/* IGC 멘토링 (유료) 티저 */}
       <section className="container py-14">
         <div className="rounded-3xl bg-igc-navy p-8 text-white md:p-12">
-          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">IGC반 · 유료 프로그램</span>
-          <h2 className="mt-4 text-2xl font-bold md:text-3xl">준비까지 T스쿨이 관리합니다</h2>
-          <p className="mt-3 max-w-2xl text-white/80">스터디플래너로 학습관리, 생기북·모고모고로 성적관리. IGC 지원을 매달 체계적으로 관리하는 유료 반입니다.</p>
+          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">IGC 멘토링 · 유료</span>
+          <h2 className="mt-4 text-2xl font-bold md:text-3xl">멘토가 IGC 준비를 매주 관리합니다</h2>
+          <p className="mt-3 max-w-2xl text-white/80">전담 멘토가 스터디플래너로 IGC 준비를, 생기북 앱으로 교과·생기부를 관리합니다. 4주 기준 58만원.</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <Link to="/promo/igcclass/study" className="group rounded-2xl bg-white/10 p-5 hover:bg-white/15">
               <CalendarCheck className="h-5 w-5" />
-              <p className="mt-3 font-bold">학습관리 · 스터디플래너</p>
-              <p className="mt-1 text-sm text-white/70">마감 역산 플랜 + 주간 코칭</p>
+              <p className="mt-3 font-bold">IGC 준비 관리 · 스터디플래너</p>
+              <p className="mt-1 text-sm text-white/70">마감 역산 플랜 + 주간 점검</p>
             </Link>
             <Link to="/promo/igcclass/grade" className="group rounded-2xl bg-white/10 p-5 hover:bg-white/15">
               <LineChart className="h-5 w-5" />
-              <p className="mt-3 font-bold">성적관리 · 생기북·모고모고</p>
-              <p className="mt-1 text-sm text-white/70">생기부·전공적합성 + 성적 추이</p>
+              <p className="mt-3 font-bold">교과·생기부 관리 · 생기북</p>
+              <p className="mt-1 text-sm text-white/70">교과 성적 + 생기부·전공적합성</p>
             </Link>
           </div>
           <Link to="/promo/igcclass" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white hover:gap-2">
-            IGC반 요금·구성 보기 <ArrowRight className="h-4 w-4" />
+            IGC 멘토링 요금·구성 보기 <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

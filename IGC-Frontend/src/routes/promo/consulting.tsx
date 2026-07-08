@@ -53,9 +53,9 @@ function Consulting() {
           </Link>
         </div>
         <div className="rounded-2xl border bg-slate-50 p-8">
-          <SectionHead eyebrow="WHY IGC반" title="꾸준한 관리가 필요하다면, IGC반" desc="일회성 상담을 넘어 학습·성적을 매달 관리받고 싶다면 유료 IGC반으로 연결됩니다." />
+          <SectionHead eyebrow="WHY IGC 멘토링" title="꾸준한 관리가 필요하다면, IGC 멘토링" desc="일회성 상담을 넘어 멘토가 플래너·생기북으로 매주 관리받고 싶다면 IGC 멘토링으로 연결됩니다." />
           <Link to="/promo/igcclass" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
-            IGC반 요금·구성 보기 <ArrowRight className="h-4 w-4" />
+            IGC 멘토링 요금·구성 보기 <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

@@ -11,8 +11,9 @@ type Item = { label: string; to?: string; badge?: string; children?: Leaf[] };
 
 const MENU: Item[] = [
   {
-    label: "입시정보",
+    label: "블로그",
     children: [
+      { to: "/promo/blog", label: "입시 정보 블로그", hint: "IGC 입시 질문·전략" },
       { to: "/promo/universities", label: "대학 비교", hint: "4개 대학 전형·학과" },
       { to: "/promo/deadlines", label: "2027 원서 마감일", hint: "학기·전형 단계별" },
       { to: "/promo/english", label: "어학 우회로", hint: "수능영어·토익·조건부" },
@@ -20,7 +21,6 @@ const MENU: Item[] = [
   },
   { label: "수시 병행", to: "/promo/parallel" },
   { label: "컨설팅 비용", to: "/promo/pricing" },
-  { label: "블로그", to: "/promo/blog" },
   { label: "합격진단", to: "/promo/diagnosis" },
   {
     label: "올인원 서비스",
@@ -33,12 +33,12 @@ const MENU: Item[] = [
     ],
   },
   {
-    label: "IGC반",
+    label: "IGC 멘토링",
     badge: "유료",
     children: [
-      { to: "/promo/igcclass", label: "IGC반 소개", hint: "요금제 한눈에" },
-      { to: "/promo/igcclass/study", label: "학습관리 · 플래너", hint: "스터디플래너 코칭" },
-      { to: "/promo/igcclass/grade", label: "성적관리 · 생기북·모고", hint: "생기부·모의고사 관리" },
+      { to: "/promo/igcclass", label: "IGC 멘토링 소개", hint: "멘토가 플래너·생기북으로 관리" },
+      { to: "/promo/igcclass/study", label: "스터디플래너 앱 소개", hint: "IGC 준비 관리 플랫폼" },
+      { to: "/promo/igcclass/grade", label: "생기북 앱 소개", hint: "교과·생기부 관리 앱" },
     ],
   },
 ];

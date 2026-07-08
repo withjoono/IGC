@@ -95,12 +95,12 @@ function Pricing() {
         </div>
       </section>
 
-      {/* IGC반 구분 */}
+      {/* IGC 멘토링 구분 */}
       <section className="container mt-14">
         <div className="rounded-2xl border bg-slate-50 p-8">
-          <SectionHead eyebrow="함께 보면 좋아요" title="컨설팅(1회) + IGC반(월 관리)은 별도입니다" desc="위 비용은 원서 사이클 1회 컨설팅입니다. 고1·고2부터 학습·성적을 매달 관리받으려면 월 구독형 IGC반과 함께하면 효과가 큽니다." />
+          <SectionHead eyebrow="함께 보면 좋아요" title="컨설팅(1회) + IGC 멘토링(4주 관리)은 별도입니다" desc="위 비용은 원서 사이클 1회 컨설팅입니다. 고1·고2부터 멘토가 플래너·생기북으로 관리받으려면 IGC 멘토링(4주 58만원)과 함께하면 효과가 큽니다." />
           <Link to="/promo/igcclass" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
-            IGC반(학습·성적 관리) 보기 <ArrowRight className="h-4 w-4" />
+            IGC 멘토링 보기 <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
