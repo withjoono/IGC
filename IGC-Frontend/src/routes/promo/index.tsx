@@ -23,7 +23,7 @@ function Landing() {
     <>
       <Seo
         title="인천글로벌캠퍼스(IGC) 입시 정보·컨설팅"
-        description="IGC 4개 대학(스토니브룩·유타·조지메이슨·겐트) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, IGC 멘토링."
+        description="IGC 5개 대학(스토니브룩·유타·조지메이슨·겐트·FIT) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, IGC 멘토링."
         path="/promo"
       />
 
@@ -97,7 +97,7 @@ function Landing() {
       </section>
 
       <section className="container py-14">
-        <SectionTitle icon={<Globe2 className="h-5 w-5" />} title="IGC 4개 대학, 한눈에" sub="성격이 전혀 다른 4개 대학. 내 성적·전공에 맞는 곳을 찾으세요." />
+        <SectionTitle icon={<Globe2 className="h-5 w-5" />} title="IGC 5개 대학, 한눈에" sub="성격이 전혀 다른 5개 대학. 내 성적·전공에 맞는 곳을 찾으세요." />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {UNIVERSITIES.map((u) => (
             <Link key={u.id} to="/promo/universities/$uniId" params={{ uniId: u.id }} className="group rounded-2xl border p-5 transition hover:border-igc-blue hover:shadow-md">

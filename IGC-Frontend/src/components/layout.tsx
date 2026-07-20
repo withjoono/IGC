@@ -14,7 +14,7 @@ const MENU: Item[] = [
     label: "블로그",
     children: [
       { to: "/promo/blog", label: "입시 정보 블로그", hint: "IGC 입시 질문·전략" },
-      { to: "/promo/universities", label: "대학 비교", hint: "4개 대학 전형·학과" },
+      { to: "/promo/universities", label: "대학 비교", hint: "5개 대학 전형·학과" },
       { to: "/promo/deadlines", label: "2027 원서 마감일", hint: "학기·전형 단계별" },
       { to: "/promo/english", label: "어학 우회로", hint: "수능영어·토익·조건부" },
     ],

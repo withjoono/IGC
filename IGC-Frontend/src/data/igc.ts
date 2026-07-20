@@ -1,7 +1,7 @@
 // IGC 입시 데이터 — 출처: IGC2027.xlsx (요강 / 과별 정원 / 2027 원서마감일)
 // 운영 시 Hub 백엔드(/api-nest) 또는 CMS로 교체 가능. 현재는 정적 소스(프리렌더 친화).
 
-export type UniId = "ghent" | "sbu" | "utah" | "gmu";
+export type UniId = "ghent" | "sbu" | "utah" | "gmu" | "fit";
 
 export interface University {
   id: UniId;
@@ -158,6 +158,35 @@ export const UNIVERSITIES: University[] = [
       { college: "예술", name: "컴퓨터게임디자인학과", degree: "BFA", quota: "미공개", note: "추가 에세이 제출" },
     ],
   },
+  {
+    id: "fit",
+    name: "한국뉴욕주립대학교 FIT",
+    shortName: "FIT(뉴욕주립)",
+    country: "미국",
+    type: "공립 · 패션 특성화",
+    rank: "세계 패션대학 4위권",
+    campus: "2년 한국(준학사) + 2년 뉴욕/밀라노(학사)",
+    tuition: "미공개 — 공식 확인 (스토니브룩과 동일 학교법인)",
+    quota: "105명 (패션디자인 30 + 패션경영 75)",
+    terms: "9월 (가을학기만)",
+    tracks: "종합 평가 (미국식 입학사정관제)",
+    reviewStyle: "제출 서류 전체를 종합 심사 — 성적·자기소개서·포트폴리오를 함께 봄",
+    english: "TOEFL iBT 80 / IELTS 6.5 / Duolingo 110 (SUNY Korea 공통 기준)",
+    englishAlt: "세부 기준·조건부 여부는 공식 입학처 확인 — 스토니브룩과 동일 학교법인(한국뉴욕주립대)",
+    ownExam: "-",
+    requiredDocs:
+      "[영문]성적표, [영문]졸업증명서, [영문]자기소개서, 공인영어성적 / (패션디자인) +포트폴리오(에세이 1 · 디자인 프로젝트 2 · 재봉 프로젝트 1)",
+    optionalDocs: "대내외활동·수상, SAT/ACT/AP/IB",
+    fee: "$65",
+    notes: "9월 입학만 가능 / 한국 2년(AAS 준학사) 후 FIT 뉴욕·밀라노로 편입해 학사 취득 / 패션디자인 지원자만 포트폴리오 필수",
+    decisiveFactor: "포트폴리오·정성평가",
+    gpaImpact: "2~4 (정성평가 비중 큼)",
+    link: "https://www.sunykorea.ac.kr",
+    majors: [
+      { college: "패션", name: "패션디자인학과", degree: "AAS(준학사)", quota: "30", note: "Fashion Design · 포트폴리오 필수" },
+      { college: "패션", name: "패션경영학과", degree: "AAS(준학사)", quota: "75", note: "Fashion Business Management" },
+    ],
+  },
 ];
 
 export function getUniversity(id: string): University | undefined {
@@ -193,6 +222,8 @@ export const DEADLINES: Deadline[] = [
   { uni: "utah", uniName: "유타대", term: "2027 가을학기", stage: "1차 우선지원 마감", date: "2027-04-01", estimated: true },
   { uni: "utah", uniName: "유타대", term: "2027 가을학기", stage: "2차 우선지원 마감", date: "2027-06-01", estimated: true },
   { uni: "utah", uniName: "유타대", term: "2027 가을학기", stage: "최종 지원마감", date: "2027-07-15", estimated: true },
+  { uni: "fit", uniName: "FIT(뉴욕주립)", term: "2027 가을학기", stage: "1차 우선지원 마감", date: "2027-03-15", estimated: true },
+  { uni: "fit", uniName: "FIT(뉴욕주립)", term: "2027 가을학기", stage: "최종 지원마감", date: "2027-06-30", estimated: true },
 ];
 
 export interface BlogPost {
@@ -222,7 +253,7 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     body: [
       '"내신이 5등급인데… 해외 대학은 무리겠죠?" 상담에서 가장 많이 듣는 말입니다. 결론부터 말하면, 충분히 가능합니다.',
-      "인천글로벌캠퍼스(IGC)의 4개 대학은 수능·내신 등급을 합산해 줄 세우지 않습니다. 대신 학업 궤적, 전공 적합성, 어학, 활동을 함께 보는 '학생 전체를 보는 평가(홀리스틱 리뷰)'로 평가합니다.",
+      "인천글로벌캠퍼스(IGC)의 5개 대학은 수능·내신 등급을 합산해 줄 세우지 않습니다. 대신 학업 궤적, 전공 적합성, 어학, 활동을 함께 보는 '학생 전체를 보는 평가(홀리스틱 리뷰)'로 평가합니다.",
       "수학·과학이 강한 이과 학생이라면 겐트대는 내신과 무관하게 자체 입학시험(수학·화학)으로 당락이 갈립니다. 어학이 부담이라면 유타대는 토익 695, 조지메이슨은 수능영어 1등급이나 Versant 시험으로도 지원할 수 있고, 점수가 모자라도 조건부입학으로 길이 열립니다.",
       "물론 4·5등급이라고 자동 합격은 아닙니다. 핵심은 내 강점을 어떤 대학·전형에 어떻게 연결하느냐입니다.",
     ],
@@ -231,7 +262,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "igc-2027-deadlines",
     title: "2027학년도 IGC 원서, 언제까지 내야 하나요? (전 대학 마감일 총정리)",
     category: "마감·일정",
-    excerpt: "우선지원은 빠를수록 유리. 4개 대학 2027 마감일을 한눈에.",
+    excerpt: "우선지원은 빠를수록 유리. 5개 대학 2027 마감일을 한눈에.",
     keyword: "IGC 원서마감",
     date: "2026-07-01",
     cover: "/images/campus-2.svg",
@@ -268,7 +299,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 // T스쿨 위성앱 — IGC 준비 단계 매핑 (/promo 컨벤션)
 export const TSCHOOL_APPS = [
-  { name: "입시검색", role: "4개 대학 요건 비교·맞춤 추천", url: "https://search-front.web.app" },
+  { name: "입시검색", role: "5개 대학 요건 비교·맞춤 추천", url: "https://search-front.web.app" },
   { name: "맞춤입시전달", role: "성적·어학 맞춤 마감 알림", url: "https://infocast-front.web.app" },
   { name: "스터디플래너", role: "어학·자체시험·원서 마감 역산 플랜", url: "https://studyplanner.kr/promo" },
   { name: "생기북", role: "전공 적합성·활동·추천서 근거 정리", url: "https://ms-front.web.app/promo" },

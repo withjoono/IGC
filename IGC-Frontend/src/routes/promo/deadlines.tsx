@@ -21,7 +21,7 @@ function Deadlines() {
   return (
     <>
       <Seo title="2027 IGC 원서 마감일 총정리" description="겐트·스토니브룩·유타·조지메이슨 2027학년도 전 학기·전형 단계별 원서 마감일. 임박순 정렬." path="/promo/deadlines" />
-      <PageHeader title="2027 원서 마감일" desc="4개 대학 전 일정을 임박순으로. 우선지원은 빠를수록 장학·기숙사에서 유리하고, 정원 충원 시 조기 마감됩니다." />
+      <PageHeader title="2027 원서 마감일" desc="5개 대학 전 일정을 임박순으로. 우선지원은 빠를수록 장학·기숙사에서 유리하고, 정원 충원 시 조기 마감됩니다." />
 
       <div className="container flex flex-wrap gap-2">
         <FilterBtn active={filter === "all"} onClick={() => setFilter("all")}>전체</FilterBtn>

@@ -29,4 +29,9 @@ export const UNI_PHOTOS: Record<string, UniPhoto> = {
     credit: "겐트대 본교(Boekentoren 등) · Wikimedia Commons (CC BY-SA)",
     source: "https://commons.wikimedia.org/wiki/Category:Ghent_University",
   },
+  fit: {
+    src: "/images/uni-fit.jpg",
+    credit: "FIT(Fashion Institute of Technology) 뉴욕 본교 · Wikimedia Commons (CC BY-SA)",
+    source: "https://commons.wikimedia.org/wiki/Category:Fashion_Institute_of_Technology",
+  },
 };

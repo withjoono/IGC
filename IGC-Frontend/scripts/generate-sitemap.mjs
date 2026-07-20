@@ -2,8 +2,8 @@
 import { writeFileSync } from "node:fs";
 
 const BASE = process.env.SITE_URL || "https://tigc.kr";
-const unis = ["ghent", "sbu", "utah", "gmu"];
-const blog = ["naesin-5-igc", "igc-2027-deadlines"];
+const unis = ["ghent", "sbu", "utah", "gmu", "fit"];
+const blog = ["naesin-5-igc", "igc-2027-deadlines", "ghent-entrance-exam"];
 
 const routes = [
   "/promo",

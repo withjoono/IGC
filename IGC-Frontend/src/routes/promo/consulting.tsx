@@ -19,7 +19,7 @@ function Consulting() {
 
       <section className="container">
         <StatBand items={[
-          { value: "4개 대학", label: "전형 전담 분석" },
+          { value: "5개 대학", label: "전형 전담 분석" },
           { value: "1:1", label: "맞춤 컨설팅" },
           { value: "정성+정량", label: "학생 전체 평가 대응" },
           { value: "마감까지", label: "원서 동행" },

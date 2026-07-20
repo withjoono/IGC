@@ -23,6 +23,8 @@ function Diagnosis() {
     if (u.id === "ghent") score += gpa <= 5 ? 1 : 0; // 내신 무관
     if (u.id === "sbu") score += gpa <= 3 ? 2 : gpa <= 5 ? 1 : 0;
     if (u.id === "utah" || u.id === "gmu") score += gpa <= 4 ? 2 : gpa <= 5 ? 1 : 0;
+    if (u.id === "fit") score += track === "예체능" ? 3 : -1; // 패션·포트폴리오 중심
+    if (u.id === "fit") score += gpa <= 5 ? 1 : 0; // 정성평가 비중 큼
     if (eng === "있음") score += 1;
     if (eng === "없음") score += u.id === "ghent" ? 0 : -1; // 우회로 많음
     const level = score >= 3 ? "유망" : score >= 1 ? "도전 가능" : "전략 필요";
