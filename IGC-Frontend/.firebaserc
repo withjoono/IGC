@@ -5,7 +5,9 @@
   "targets": {
     "ts-front-479305": {
       "hosting": {
-        "igc": ["igc-front"]
+        "igc": [
+          "igc-front"
+        ]
       }
     }
   },

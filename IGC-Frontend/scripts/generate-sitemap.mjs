@@ -6,7 +6,7 @@ const unis = ["ghent", "sbu", "utah", "gmu", "fit"];
 const blog = ["naesin-5-igc", "igc-2027-deadlines", "ghent-entrance-exam"];
 
 const routes = [
-  "/promo",
+  "/",
   "/promo/universities",
   ...unis.map((u) => `/promo/universities/${u}`),
   "/promo/deadlines",
