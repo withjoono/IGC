@@ -36,6 +36,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",
     "@tanstack/react-router": "^1.45.0",
+    "@tskool/satellite-header": "file:../../Music_College/packages/satellite-header",
     "clsx": "^2.1.1",
     "lucide-react": "^0.417.0",
     "react": "^18.3.1",

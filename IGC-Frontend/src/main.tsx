@@ -3,6 +3,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
+import "@tskool/satellite-header/styles.css";
 
 import { routeTree } from "./routeTree.gen";
 
@@ -29,8 +30,12 @@ const app = (
   </HelmetProvider>
 );
 
-// react-snap 프리렌더 호환: 기존 마크업이 있으면 hydrate, 없으면 render
-if (rootElement.hasChildNodes()) {
+// Hub의 크롤러용 브랜드 본문은 React 프리렌더 결과가 아니므로 교체 렌더링합니다.
+const hasBrandFallback = Array.from(rootElement.childNodes).some(
+  (node) => node.nodeType === Node.COMMENT_NODE && node.textContent?.includes("T Skool brand body:"),
+);
+// react-snap으로 생성된 React 마크업만 hydrate합니다.
+if (rootElement.hasChildNodes() && !hasBrandFallback) {
   ReactDOM.hydrateRoot(rootElement, app);
 } else {
   ReactDOM.createRoot(rootElement).render(app);

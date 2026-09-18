@@ -9,6 +9,19 @@
 
 ## 실행
 
+### 공통 헤더 의존성
+
+`@tskool/satellite-header`는 `../../Music_College/packages/satellite-header`를
+`file:` 의존성으로 연결합니다. 소스와 스타일의 원본은 이 로컬 패키지에 있습니다.
+새 환경이나 CI에서도 `Music_College` 저장소를 IGC와 같은 상위 폴더에 체크아웃한 뒤
+`npm ci`를 실행해야 합니다.
+
+앱별 메뉴·링크는 `src/data/header.ts`, TanStack Router 연결은
+`src/components/header.tsx`에서 관리합니다. 기존 콘텐츠 목적지는 하단 가로 스크롤
+메뉴에 유지합니다. Vite의 React 중복 제거와 TypeScript의 React 타입 경로 설정은
+공통 패키지의 React 19 개발 환경과 이 앱의 React 18이 충돌하지 않도록 합니다.
+개인 인증·잔액·알림 조회는 아직 없으며, 계정 도구는 Hub의 실제 페이지로 연결합니다.
+
 ```bash
 npm install
 npm run dev        # http://localhost:3024 (→ /promo)
