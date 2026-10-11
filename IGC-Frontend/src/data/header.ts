@@ -18,7 +18,7 @@ export const HEADER_GROUPS: HeaderGroup[] = [
     tools: [
       { title: "마감 역산 학습 계획", description: "어학 공부와 시험 준비를 일간·주간 계획으로 나누세요.", app: "스터디플래너", url: "https://studyplanner.kr/promo", intro: true },
       { title: "IGC 준비 플래너 안내", description: "멘토링에서 학습 계획과 실행을 관리하는 방법을 확인하세요.", app: "T IGC", url: "/promo/igcclass/study" },
-      { title: "겐트 지원 준비", description: "자체시험 등 겐트대학교의 전형과 준비 요건을 살펴보세요.", app: "T IGC", url: "/promo/universities/ghent" },
+      { title: "겐트 입학시험 대비반", description: "선생님 온라인 강의와 실전 온라인 모의고사로 합격선 14점을 준비하세요.", app: "T IGC", url: "/promo/ghent-exam" },
     ],
   },
   {
@@ -67,6 +67,7 @@ export const HEADER_NAV: HeaderNavItem[] = [
   { href: "/promo/universities", label: "대학 비교", match: "prefix" },
   { href: "/promo/deadlines", label: "2027 원서 마감일" },
   { href: "/promo/english", label: "어학 우회로·대행" },
+  { href: "/promo/ghent-exam", label: "겐트 시험 대비반" },
   { href: "/promo/cases", label: "합격 사례" },
   { href: "/promo/igcclass/study", label: "스터디플래너 앱 소개" },
   { href: "/promo/igcclass/grade", label: "생기북 앱 소개" },

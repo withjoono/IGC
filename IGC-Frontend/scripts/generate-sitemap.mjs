@@ -14,6 +14,7 @@ const routes = [
   "/promo/pricing",
   "/promo/diagnosis",
   "/promo/english",
+  "/promo/ghent-exam",
   "/promo/apps",
   "/promo/blog",
   ...blog.map((b) => `/promo/blog/${b}`),

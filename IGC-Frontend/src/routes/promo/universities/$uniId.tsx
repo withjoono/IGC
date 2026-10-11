@@ -54,6 +54,12 @@ function UniDetail() {
             <Row label="특이사항" value={u.notes} />
           </dl>
           <a href={u.link} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-igc-blue hover:underline">공식 입학 페이지 →</a>
+          {u.id === "ghent" && (
+            <Link to="/promo/ghent-exam" className="mt-6 block rounded-2xl border-2 border-igc-blue/30 bg-igc-blue/5 p-5 transition hover:border-igc-blue">
+              <p className="text-xs font-semibold text-igc-blue">겐트 입학시험 대비반 · 온라인</p>
+              <p className="mt-1 font-bold text-igc-navy">수학·화학 14점, 온라인 강의와 모의고사로 먼저 확보하세요 →</p>
+            </Link>
+          )}
         </div>
 
         <div className="space-y-8">
