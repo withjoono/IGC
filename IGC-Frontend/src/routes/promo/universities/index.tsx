@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Seo } from "@/components/seo";
 import { ConsultCTA, PageHeader } from "@/components/layout";
 import { UNIVERSITIES } from "@/data/igc";
+import { UNI_PHOTOS } from "@/data/photos";
 
 export const Route = createFileRoute("/promo/universities/")({
   component: Universities,
@@ -12,6 +13,19 @@ function Universities() {
     <>
       <Seo title="IGC 5개 대학 비교" description="스토니브룩·유타·조지메이슨·겐트·FIT — 유형·순위·학비·정원·전형·어학·결정변수를 한 표로 비교." path="/promo/universities" />
       <PageHeader title="IGC 5개 대학 비교" desc="국적·순위·학비·전형·어학·내신 영향까지 한눈에. 행을 클릭하면 대학별 상세로 이동합니다." />
+
+      <section className="container mb-10 grid grid-cols-2 gap-4 md:grid-cols-5">
+        {UNIVERSITIES.map((u) => (
+          <Link key={u.id} to="/promo/universities/$uniId" params={{ uniId: u.id }} className="group overflow-hidden rounded-2xl border transition hover:border-igc-blue hover:shadow-md">
+            <img src={UNI_PHOTOS[u.id]?.src} alt={`${u.shortName} 본교`} loading="lazy" className="aspect-video w-full border-b object-cover" />
+            <div className="p-3">
+              <p className="text-sm font-bold text-igc-navy">{u.shortName}</p>
+              <p className="text-xs text-muted-foreground">{u.country} · {u.rank}</p>
+            </div>
+          </Link>
+        ))}
+      </section>
+
       <div className="container overflow-x-auto">
         <table className="w-full min-w-[760px] border-collapse text-sm">
           <thead>

@@ -4,6 +4,7 @@ import { Seo } from "@/components/seo";
 import { ConsultCTA } from "@/components/layout";
 import { StatBand } from "@/components/ui";
 import { UNIVERSITIES, DEADLINES, BLOG_POSTS } from "@/data/igc";
+import { UNI_PHOTOS } from "@/data/photos";
 
 export const Route = createFileRoute("/promo/")({
   component: Landing,
@@ -101,6 +102,7 @@ function Landing() {
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {UNIVERSITIES.map((u) => (
             <Link key={u.id} to="/promo/universities/$uniId" params={{ uniId: u.id }} className="group rounded-2xl border p-5 transition hover:border-igc-blue hover:shadow-md">
+              <img src={UNI_PHOTOS[u.id]?.src} alt={`${u.shortName} 본교`} loading="lazy" className="mb-3 aspect-video w-full rounded-lg border object-cover" />
               <p className="text-xs text-muted-foreground">{u.country} · {u.rank}</p>
               <h3 className="mt-1 text-lg font-bold text-igc-navy">{u.shortName}</h3>
               <dl className="mt-3 space-y-1 text-sm text-foreground/80">
