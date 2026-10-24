@@ -5,7 +5,7 @@
 - **스택**: Vite 5 + React 18 + TanStack Router(파일기반) + Tailwind 3 + lucide-react
 - **dev 포트**: `3024` (Hub 3000 / Susi 3001 … IGC 3024)
 - **URL 컨벤션**: 루트 `/` → `/promo` 리다이렉트, 모든 페이지는 `/promo/*` 하위
-- **SEO**: react-helmet-async(페이지별 메타/OG) + 빌드 시 sitemap/robots 생성. 정적 프리렌더는 선택(아래 참조).
+- **SEO**: 빌드 타임 프리렌더(React 서버 렌더링, Chromium 불필요)로 라우트마다 완성 HTML 생성 + react-helmet-async 페이지별 title·description·canonical·OG·JSON-LD + sitemap 자동 생성 (아래 참조).
 
 ## 실행
 
@@ -25,21 +25,31 @@
 ```bash
 npm install
 npm run dev        # http://localhost:3024 (→ /promo)
-npm run build      # sitemap 생성 + tsc -b + vite build → dist/
+npm run build      # vite build → SSR 빌드 → tsc -b → 프리렌더 + sitemap → dist/
 npm run preview
-npm run gen:sitemap
 ```
 
-### 정적 프리렌더(선택) — 검색엔진에 완성 HTML 제공
+### 빌드 타임 프리렌더 — 검색엔진에 완성 HTML 제공
 
-블로그·대학 페이지의 SEO를 강화하려면 빌드 후 프리렌더를 적용한다. `react-snap`은 puppeteer(Chromium)를 받으므로 기본 의존성에서 분리했다.
+`npm run build` 가 항상 수행한다(별도 명령 없음).
 
-```bash
-PUPPETEER_SKIP_DOWNLOAD=  npm i -D react-snap   # Chromium 포함 설치
-npm run build && npm run prerender              # dist/ 의 각 라우트를 정적 HTML로
-```
+1. `vite build` — 클라이언트 번들 → `dist/`
+2. `vite build --ssr src/entry-server.tsx --outDir dist-ssr` — 서버 렌더용 엔트리
+3. `tsc -b` — 타입 게이트
+4. `node scripts/prerender.mjs`
+   - `src/entry-server.tsx` 의 `PRERENDER_ROUTES` 각 경로를 렌더해 `dist/<경로>/index.html` 생성
+   - `index.html` 브랜드 블록(Hub 자동 생성)의 사이트 공통 canonical·description·OG(홈 값)는 **출력물에서만** 지우고 페이지별 `<Seo>` 값으로 교체 — 원본 블록은 건드리지 않는다
+   - `dist/index.html`(= `/` 와 SPA fallback)은 랜딩(`/promo`) 본문 + canonical `https://tigc.kr/`
+   - 같은 목록으로 `dist/sitemap.xml`·`public/sitemap.xml` 생성 (블로그 글은 `date`/`updated` 가 lastmod)
+   - 페이지에 `<Seo>` 가 없거나 렌더가 200이 아니면 빌드 실패
 
-react-snap 설정(대상 라우트)은 `package.json`의 `reactSnap.include`에 정의돼 있다. 사내 정책상 Chromium 다운로드가 막히면, Firebase Hosting 단의 동적 렌더링(봇 대상) 또는 별도 SSG로 대체한다.
+**라우트를 추가하면 `PRERENDER_ROUTES` 에 넣는다.** 대학(`UNIVERSITIES`)·블로그(`BLOG_POSTS`)는 데이터에서 자동으로 포함된다.
+
+클라이언트(`src/main.tsx`)는 `#root[data-ssr-path]` 가 현재 경로와 같을 때만 hydrate 한다. "지금" 시각에 따라 바뀌는 값(D-day·연도)은 `src/lib/now.ts` 의 `useNow()` 로 그려야 hydration 불일치가 나지 않는다 — 렌더 중에 `Date.now()` 를 직접 쓰지 말 것.
+
+`firebase.json` 의 `trailingSlash: false` 로 `/promo/x/` 는 `/promo/x` 로 301, `/promo/x` 는 `dist/promo/x/index.html` 을 준다(canonical 과 일치).
+
+검색엔진 소유 확인 메타가 필요하면 배포 시 환경변수로 넣는다: `GOOGLE_SITE_VERIFICATION=... NAVER_SITE_VERIFICATION=... npm run deploy:firebase`
 
 > `src/routeTree.gen.ts`는 TanStack Router Vite 플러그인이 dev/build 시 자동 생성한다(gitignore 처리됨). 최초 `npm run dev` 또는 `npm run build` 한 번이면 만들어진다.
 

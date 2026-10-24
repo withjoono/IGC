@@ -13,3 +13,4 @@ src/routeTree.gen.ts
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+dist-ssr

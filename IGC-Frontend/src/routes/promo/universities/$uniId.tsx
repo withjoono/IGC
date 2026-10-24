@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Seo } from "@/components/seo";
+import { Seo, breadcrumbLd } from "@/components/seo";
 import { ConsultCTA } from "@/components/layout";
 import { CampusPhoto } from "@/components/campus-photo";
-import { getUniversity, DEADLINES } from "@/data/igc";
+import { getUniversity, DEADLINES, BLOG_POSTS } from "@/data/igc";
 import { UNI_PHOTOS } from "@/data/photos";
 
 export const Route = createFileRoute("/promo/universities/$uniId")({
@@ -27,9 +27,26 @@ function Row({ label, value }: { label: string; value: string }) {
 function UniDetail() {
   const u = Route.useLoaderData();
   const deadlines = DEADLINES.filter((d) => d.uni === u.id);
+  const guides = BLOG_POSTS.filter((p) => p.uni === u.id);
   return (
     <>
-      <Seo title={`${u.shortName} 입학 전형`} description={`${u.name} — ${u.tracks}. 어학 ${u.english}. ${u.decisiveFactor}이 합격을 좌우.`} path={`/promo/universities/${u.id}`} />
+      <Seo
+        title={`${u.shortName} 입시 2027 — ${u.name} 전형·어학·원서 마감일`}
+        description={`인천글로벌캠퍼스(송도) ${u.name} 2027학년도 입시 정리. 전형 ${u.tracks} · 어학 기준 · 학과·정원 · 원서 마감일. 핵심 변수: ${u.decisiveFactor}.`}
+        path={`/promo/universities/${u.id}`}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "IGC 대학 비교", path: "/promo/universities" },
+            { name: u.name, path: `/promo/universities/${u.id}` },
+          ]),
+          {
+            "@type": "CollegeOrUniversity",
+            name: u.name,
+            url: u.link,
+            address: { "@type": "PostalAddress", addressLocality: "인천 연수구 송도동", addressCountry: "KR" },
+          },
+        ]}
+      />
       <div className="container pt-10">
         <Link to="/promo/universities" className="text-sm text-igc-blue hover:underline">← 대학 비교로</Link>
         <p className="mt-4 text-sm text-muted-foreground">{u.country} {u.type} · {u.rank}</p>
@@ -54,6 +71,21 @@ function UniDetail() {
             <Row label="특이사항" value={u.notes} />
           </dl>
           <a href={u.link} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-medium text-igc-blue hover:underline">공식 입학 페이지 →</a>
+          {guides.length > 0 && (
+            <div className="mt-8">
+              <h2 className="text-xl font-bold text-igc-navy">{u.shortName} 입시 가이드</h2>
+              <ul className="mt-3 space-y-2">
+                {guides.map((g) => (
+                  <li key={g.slug}>
+                    <Link to="/promo/blog/$slug" params={{ slug: g.slug }} className="block rounded-lg border p-4 transition hover:border-igc-blue">
+                      <span className="font-semibold text-igc-navy">{g.title}</span>
+                      <span className="mt-1 block text-sm text-muted-foreground">{g.excerpt}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className="space-y-8">

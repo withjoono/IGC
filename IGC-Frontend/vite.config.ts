@@ -26,6 +26,10 @@ export default defineConfig({
       },
     },
   },
+  // 빌드 타임 프리렌더(SSR 빌드)에서 공통 헤더 패키지는 TS 소스 그대로라 번들에 포함
+  ssr: {
+    noExternal: ["@tskool/satellite-header", "react-helmet-async"],
+  },
   build: {
     outDir: "dist",
     sourcemap: false,

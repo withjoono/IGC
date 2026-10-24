@@ -5,33 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3024 --host",
-    "build": "node scripts/generate-sitemap.mjs && vite build && tsc -b && node scripts/prepare-hosting.mjs",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && tsc -b && node scripts/prerender.mjs",
     "preview": "vite preview --port 3024",
     "lint": "eslint . --ext ts,tsx --max-warnings 0",
-    "gen:sitemap": "node scripts/generate-sitemap.mjs",
-    "prerender": "react-snap",
     "deploy:firebase": "npm run build && firebase deploy --only hosting:igc"
-  },
-  "reactSnap": {
-    "source": "dist",
-    "minifyHtml": { "collapseWhitespace": false, "removeComments": false },
-    "include": [
-      "/promo",
-      "/promo/universities",
-      "/promo/universities/ghent",
-      "/promo/universities/sbu",
-      "/promo/universities/utah",
-      "/promo/universities/gmu",
-      "/promo/universities/fit",
-      "/promo/deadlines",
-      "/promo/parallel",
-      "/promo/pricing",
-      "/promo/diagnosis",
-      "/promo/english",
-      "/promo/apps",
-      "/promo/blog",
-      "/promo/consult"
-    ]
   },
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",

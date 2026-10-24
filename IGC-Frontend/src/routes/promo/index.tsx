@@ -1,3 +1,4 @@
+import { daysUntil, useNow } from "@/lib/now";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarClock, GraduationCap, Globe2, Sparkles, CalendarCheck, LineChart, ShieldCheck, PackageCheck, Phone } from "lucide-react";
 import { Seo } from "@/components/seo";
@@ -10,11 +11,10 @@ export const Route = createFileRoute("/promo/")({
   component: Landing,
 });
 
-function daysLeft(iso: string) {
-  return Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000);
-}
 
 function Landing() {
+  const now = useNow();
+  const daysLeft = (iso: string) => daysUntil(iso, now);
   const upcoming = [...DEADLINES]
     .filter((d) => daysLeft(d.date) >= 0)
     .sort((a, b) => +new Date(a.date) - +new Date(b.date))
@@ -25,7 +25,7 @@ function Landing() {
       <Seo
         title="인천글로벌캠퍼스(IGC) 입시 정보·컨설팅"
         description="IGC 5개 대학(스토니브룩·유타·조지메이슨·겐트·FIT) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, IGC 멘토링."
-        path="/promo"
+        path="/"
       />
 
       <section className="bg-gradient-to-b from-slate-50 to-white">

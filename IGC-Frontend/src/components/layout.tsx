@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
+import { useNow } from "@/lib/now";
 export { Header } from "./header";
 
 export const CONSULT_PHONE = "010-2518-7139";
 export const CONSULT_TEL = "tel:01025187139";
 
 export function Footer() {
+  const year = new Date(useNow()).getFullYear();
   return (
     <footer className="mt-20 border-t bg-gray-50 py-6 sm:py-8">
       <div className="mx-auto w-full max-w-screen-lg px-6">
@@ -41,7 +43,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-4 border-t border-foreground/10 pt-2 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} (주)거북스쿨. All rights reserved.
+          © {year} (주)거북스쿨. All rights reserved.
         </div>
       </div>
     </footer>

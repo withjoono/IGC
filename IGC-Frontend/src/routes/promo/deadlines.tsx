@@ -1,3 +1,4 @@
+import { daysUntil, useNow } from "@/lib/now";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Seo } from "@/components/seo";
@@ -8,11 +9,10 @@ export const Route = createFileRoute("/promo/deadlines")({
   component: Deadlines,
 });
 
-function daysLeft(iso: string) {
-  return Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000);
-}
 
 function Deadlines() {
+  const now = useNow();
+  const daysLeft = (iso: string) => daysUntil(iso, now);
   const [filter, setFilter] = useState<UniId | "all">("all");
   const rows = [...DEADLINES]
     .filter((d) => filter === "all" || d.uni === filter)
