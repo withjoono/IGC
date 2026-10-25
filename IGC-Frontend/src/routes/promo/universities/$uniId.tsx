@@ -27,7 +27,7 @@ function Row({ label, value }: { label: string; value: string }) {
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-24 border-t pt-8">
+    <section id={id} className="scroll-mt-32 border-t pt-8">
       <h2 className="text-2xl font-bold text-igc-navy">{title}</h2>
       <div className="mt-4 space-y-4 leading-relaxed text-foreground/85">{children}</div>
     </section>
@@ -124,7 +124,7 @@ function UniDetail() {
 
       <div className="container mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
         <nav aria-label="목차" className="hidden lg:block">
-          <div className="sticky top-24 rounded-xl border p-4 text-sm">
+          <div className="sticky top-32 rounded-xl border p-4 text-sm">
             <p className="mb-2 font-semibold text-igc-navy">목차</p>
             <ol className="space-y-1.5">
               {toc.map(([id, label]) => (
