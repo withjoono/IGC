@@ -1,5 +1,6 @@
 // IGC 입시 데이터 — 출처: IGC2027.xlsx (요강 / 과별 정원 / 2027 원서마감일)
 // 운영 시 Hub 백엔드(/api-nest) 또는 CMS로 교체 가능. 현재는 정적 소스(프리렌더 친화).
+import { GUIDE_POSTS } from "./guide-posts";
 
 export type UniId = "ghent" | "sbu" | "utah" | "gmu" | "fit";
 
@@ -226,6 +227,13 @@ export const DEADLINES: Deadline[] = [
   { uni: "fit", uniName: "FIT(뉴욕주립)", term: "2027 가을학기", stage: "최종 지원마감", date: "2027-06-30", estimated: true },
 ];
 
+export type BlogBlock =
+  | string
+  | { h2: string }
+  | { list: string[] }
+  | { table: { head: string[]; rows: string[][] } }
+  | { note: string };
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -234,16 +242,21 @@ export interface BlogPost {
   keyword: string;
   /** 대학별 가이드 글이면 해당 대학 — 대학 상세 페이지에서 내부 링크 */
   uni?: UniId;
+  /** 여러 대학을 함께 다루는 글 — 해당 대학 상세 페이지 가이드 목록에 노출 */
+  unis?: UniId[];
   date: string;
   /** 내용 갱신일 (sitemap lastmod·dateModified) */
   updated?: string;
   cover?: string; // 대표 이미지 (public/images/ 경로)
-  body: string[];
+  /** 문자열 = 문단. 소제목·목록·표·참고 박스는 객체 블록 */
+  body: BlogBlock[];
+  /** 글 끝 출처 목록 */
+  sources?: { label: string; url: string }[];
   // 본문 문단 사이에 삽입할 사진: afterParagraph = 몇 번째 문단(0-based) 뒤에 넣을지
   figures?: { afterParagraph: number; src: string; caption?: string }[];
 }
 
-export const BLOG_POSTS: BlogPost[] = [
+const BASE_POSTS: BlogPost[] = [
   {
     slug: "naesin-5-igc",
     title: "내신 5등급인데 IGC 갈 수 있나요? — 솔직하게 답해드립니다",
@@ -379,6 +392,8 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
 ];
+
+export const BLOG_POSTS: BlogPost[] = [...BASE_POSTS, ...GUIDE_POSTS];
 
 // T스쿨 위성앱 — IGC 준비 단계 매핑 (/promo 컨벤션)
 export const TSCHOOL_APPS = [
