@@ -3,6 +3,7 @@ import { Seo } from "@/components/seo";
 import { ConsultCTA, PageHeader } from "@/components/layout";
 import { UNIVERSITIES } from "@/data/igc";
 import { UNI_PHOTOS } from "@/data/photos";
+import { UNI_GUIDES } from "@/data/uni-guides";
 
 export const Route = createFileRoute("/promo/universities/")({
   component: Universities,
@@ -11,8 +12,13 @@ export const Route = createFileRoute("/promo/universities/")({
 function Universities() {
   return (
     <>
-      <Seo title="IGC 5개 대학 비교" description="스토니브룩·유타·조지메이슨·겐트·FIT — 유형·순위·학비·정원·전형·어학·결정변수를 한 표로 비교." path="/promo/universities" />
+      <Seo title="인천글로벌캠퍼스 대학 비교 — 5개 대학 학비·순위·전형 2027" description="인천글로벌캠퍼스(송도) 겐트·스토니브룩·유타·조지메이슨·FIT 5개 대학의 학비, 본교 순위, 본교 이동, 장학금, 전형·어학 기준을 한 표로 비교합니다." path="/promo/universities" />
       <PageHeader title="IGC 5개 대학 비교" desc="국적·순위·학비·전형·어학·내신 영향까지 한눈에. 행을 클릭하면 대학별 상세로 이동합니다." />
+
+      <section className="container mb-8 max-w-3xl space-y-3 leading-relaxed text-foreground/85">
+        <p>인천글로벌캠퍼스(IGC)는 인천 송도에 해외 명문대의 확장 캠퍼스를 모아 둔 교육 단지입니다. 미국 스토니브룩·유타·조지메이슨·FIT와 벨기에 겐트대가 들어와 있고, 졸업하면 모두 본교와 같은 학위를 받습니다.</p>
+        <p>학비는 미국 대학 4곳이 연 $20,000~$23,550, 겐트대가 연 2,196만 원(2027-28) 수준입니다. 대부분 학업 기간 일부를 본교에서 보내며(스토니브룩 1년, 유타·조지메이슨 2학기, 겐트 1학기, FIT는 학사과정을 뉴욕·밀라노에서), 수업은 모두 영어로 진행됩니다. 기숙사는 IGC 공동 기숙사(17주 기준 2인실 약 128만 원, 1인실 약 191만 원)를 함께 씁니다.</p>
+      </section>
 
       <section className="container mb-10 grid grid-cols-2 gap-4 md:grid-cols-5">
         {UNIVERSITIES.map((u) => (
@@ -42,6 +48,7 @@ function Universities() {
             {([
               ["유형/순위", (u) => `${u.country} ${u.type} · ${u.rank}`],
               ["수업 장소", (u) => u.campus],
+              ["대표 장학금", (u) => { const it = UNI_GUIDES[u.id]?.scholarships?.items[0]; return it ? `${it.name}: ${it.detail}` : "-"; }],
               ["연 학비", (u) => u.tuition],
               ["정원", (u) => u.quota],
               ["전형", (u) => u.tracks],

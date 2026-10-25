@@ -51,7 +51,7 @@ function Deadlines() {
           </tbody>
         </table>
       </div>
-      <p className="container mt-3 text-xs text-muted-foreground">※ 유타대 2027 일정은 대학 미발표로 직전 사이클 기준 예상치입니다. 확정 시 갱신됩니다.</p>
+      <p className="container mt-3 text-xs text-muted-foreground">※ (예상) 표시는 대학이 2027 일정을 아직 발표하지 않아 직전 사이클 기준으로 잡은 날짜입니다. 확정 시 갱신됩니다.</p>
 
       <ConsultCTA context="내 학기 마감일, 놓치지 않게 챙겨드립니다" />
     </>
