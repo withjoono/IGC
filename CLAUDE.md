@@ -12,7 +12,7 @@ Claude Code 가 자동으로 읽는 진입점이다. 규칙 본문은 아래 두
 - 기본 브랜치는 **`main`** 이다(`master` 아님). 작업이 끝나면 별도 브랜치·PR 없이 **`main` 에 바로 커밋하고 푸시**한다.
 - 푸시 전 `cd IGC-Frontend && npm run build` 가 통과해야 한다(`tsc -b` 가 게이트). 프론트를 건드리지 않은 문서 작업은 빌드 생략 가능.
 - 자동 배포: `.github/workflows/deploy-igc.yml` — `main` 푸시 중 **`IGC-Frontend/**` 또는 워크플로 파일이 바뀐 경우에만** `firebase deploy --only hosting:igc` 를 실행한다. 문서만 바꾼 푸시는 배포되지 않는다.
-  - GitHub 시크릿 `FIREBASE_SERVICE_ACCOUNT` 가 있어야 동작한다.
+  - GitHub 시크릿 `FIREBASE_SERVICE_ACCOUNT` 가 있어야 동작한다. **2026-10-25 기준 미등록** — 등록 전까지 Actions 배포는 실패하므로 수동 배포로 대신한다(상세: `docs/context/deploy-and-domain.md`).
   - 푸시 후 Actions 결과를 확인하고, 실패하면 사용자에게 알린다. 수동 배포는 `npm run deploy:firebase` 만 쓴다(target 생략 금지).
 
 ## 커밋 안전 규칙 (AGENTS.md 요약 — 반드시 지킬 것)

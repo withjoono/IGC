@@ -34,6 +34,17 @@ npm run deploy:firebase   # npm run build && firebase deploy --only hosting:igc
 
 `firebase.json` 에 다른 앱 hosting 블록을 추가하지 말 것. `.firebaserc` targets 도 자기 site 하나만 유지한다.
 
+이력: 2026-07-08 최초 배포 때 `igc-front` site 가 `ts-front-479305` 에 없어서 `firebase hosting:sites:create igc-front --project ts-front-479305` 로 만든 뒤 배포했다. 이후 커스텀 도메인 tigc.kr 연결.
+
+## 자동 배포 (GitHub Actions)
+
+`.github/workflows/deploy-igc.yml`
+
+- 트리거: `main` 푸시 중 `IGC-Frontend/**` 또는 워크플로 파일 자체가 바뀐 경우 + 수동 `workflow_dispatch`. 문서만 바꾼 푸시는 배포되지 않는다.
+- 단계: `npm ci` → `npm run build` → **번들에 `localhost` 가 남으면 실패**(dev URL 유출 가드) → `google-github-actions/auth@v2` → `firebase deploy --only hosting:igc --project ts-front-479305`.
+- 필요한 GitHub 시크릿: **`FIREBASE_SERVICE_ACCOUNT`** (`ts-front-479305` 에 Firebase Hosting 배포 권한이 있는 서비스 계정 JSON). 2026-10-25 `gh secret list -R withjoono/IGC` 실측 결과 **등록된 시크릿이 없다** → 등록 전까지 워크플로는 인증 단계에서 실패한다. 그동안은 수동 `npm run deploy:firebase`.
+- 동시 배포 방지: `concurrency: deploy-igc-front` (진행 중 배포 취소).
+
 ## 도메인 tigc.kr
 
 커스텀 도메인이 `igc-front` site 에 붙어 있다. Firebase Hosting 은 `firebase.json` 에서 커스텀 도메인과 기본 도메인을 구분할 수 없어, **클라이언트에서 리다이렉트를 처리한다.**
