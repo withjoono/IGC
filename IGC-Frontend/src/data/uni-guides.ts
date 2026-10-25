@@ -72,7 +72,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
         { name: "Sciences Excellence (입학)", detail: "수학·화학·생물 장학시험 성적으로 선발. 1년간 1,800만·1,350만·900만 원." },
         { name: "Dare to Think (입학)", detail: "입학평가 최상위자. 1년간 1,800만·900만 원." },
         { name: "International Student (입학)", detail: "외국 국적 최상위자. 4년간 연 900만 원, 전 과목 10/20점 이상 통과 시 유지." },
-        { name: "재학생 성적우수", detail: "수업료 100%·75%·50%·20%, 학년당 30명 (2025-26 기준)." },
+        { name: "재학생 성적우수", detail: "수업료 100%(1명)·75%(2명)·50%(3명)·20%(4명), 학년당 10명씩 2~4학년 30명 (2025-26 기준)." },
         { name: "형제자매 장학", detail: "수업료 25%." },
         { name: "UGent 학기 장학", detail: "벨기에 본교 학기에 참여하는 4학년에게 100만 원." },
       ],
@@ -103,7 +103,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
       "벨기에 학기에 참여하는 4학년에게는 UGent 학기 장학금(100만 원)이 지급됩니다. 본교로 완전히 옮겨 졸업하는 제도는 대학 공지에서 확인되지 않습니다.",
     ],
     careers: [
-      "언론 보도에 따르면 2025년 졸업생의 65%가 석사 과정에 진학했고 35%가 취업했으며, 취업자의 45%가 R&D 분야였습니다. 진학처로 겐트대 본교, ETH Zurich, Imperial College, UCL, 서울대, KAIST 등이 소개됐습니다(메트로신문, 2026-07).",
+      "언론 보도에 따르면 대학이 공개한 2025년 자료에서 졸업생의 65%가 석사 과정에 진학했고 35%가 취업했으며, 취업자의 45%가 R&D 분야였습니다. 진학처로 겐트대 본교, ETH Zurich, Imperial College, UCL, 서울대, KAIST 등이 소개됐습니다(메트로신문, 2026-07).",
       "학과별로 대학원 진학과 연구개발, 품질·안전 관리 직무가 대표 진로로 제시됩니다.",
     ],
     campusLife: [
@@ -227,7 +227,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
   utah: {
     tagline: "미국 유타대학교의 첫 해외 캠퍼스. 연 $20,000 정액 학비, TOEIC 695 인정, SAT 선택 제출로 어학·시험 문턱이 낮습니다.",
     intro: [
-      "유타대학교 아시아캠퍼스(UAC)는 미국 유타대학교가 2014년 9월 송도에 연 첫 해외 캠퍼스입니다. 첫 학기 13명으로 시작해 2024년 가을 재학생 620명까지 늘었습니다.",
+      "유타대학교 아시아캠퍼스(UAC)는 미국 유타대학교가 2014년 9월 송도에 연 첫 해외 캠퍼스입니다. 2024년 가을 재학생은 620명으로 개교 이후 가장 많았습니다.",
       "학부생은 송도에서 공부하다가 보통 3학년 무렵 미국 솔트레이크시티(SLC) 본교에서 2개 학기를 보냅니다. 졸업하면 본교와 같은 학위를 받습니다.",
       "학과는 회계, 커뮤니케이션, 심리학, 영화·미디어아트, 전기·컴퓨터공학, 게임, 정보시스템, 도시생태학 8개입니다. 같은 IGC 안의 다른 대학 강의도 들을 수 있습니다.",
     ],
@@ -314,6 +314,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
       { label: "UAC Future Talent 장학금", url: "https://asiacampus.utah.edu/uac-future-talent-scholarship/" },
       { label: "UAC 기숙사", url: "https://asiacampus.utah.edu/dormitories/" },
       { label: "UAC 학사 안내", url: "https://asiacampus.utah.edu/academics/" },
+      { label: "UAC 소개 (교수 1인당 학생 수·IGC 교차 수강)", url: "https://asiacampus.utah.edu/?p=164" },
       { label: "UAC 이사회 회의록 (2024-09-13, PDF)", url: "https://www.global.utah.edu/wp-content/uploads/sites/49/2025/08/UAC_Board_Meeting_Minutes_2024.09.13.pdf" },
       { label: "유타대 본교 유학생 비용 (2025-26)", url: "https://admissions.utah.edu/?p=329" },
       { label: "UAC 10주년 (At the U, 2024-09)", url: "https://attheu.utah.edu/announcements/university-of-utah-asia-campus-celebrates-10th-anniversary/" },
@@ -452,7 +453,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
       ],
     },
     standing: [
-      "FIT는 CEOWORLD 매거진의 2025년 세계 패션스쿨 순위에서 1위에 올랐습니다(2019년에도 109개교 중 1위).",
+      "FIT는 CEOWORLD 매거진의 2025년 세계 패션스쿨 순위에서 1위에 올랐습니다(2019년에도 같은 순위에서 1위).",
       "송도에서 받는 학위는 FIT 전문학사(AAS)이며, 본교와 같은 교육과정·같은 학위입니다.",
     ],
     admissions: [
@@ -470,7 +471,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
     },
     homeCampus: [
       "송도 2년(AAS) + 뉴욕 또는 밀라노 2년(학사)의 2+2 구조입니다.",
-      "뉴욕 학사 진학은 보장되지 않습니다. 권장 마감일까지 지원하면 같은 전공 학사과정에 우선 고려를 받는 방식입니다. AAS를 졸업하려면 누적 GPA 2.00 이상이 필요합니다.",
+      "뉴욕 학사 진학은 자동으로 보장되지 않으며, 학생 핸드북에 정해진 학사과정 지원 마감일까지 별도로 지원해야 합니다. AAS를 졸업하려면 누적 GPA 2.00 이상이 필요합니다.",
       "뉴욕 캠퍼스 학사과정 등록금은 2026-27 기준 학기당 $10,846(비거주자)이며, 보험 등 비용이 따로 붙습니다.",
     ],
     careers: [
@@ -483,7 +484,7 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
     ],
     faq: [
       { q: "송도 FIT 학비는 얼마인가요?", a: "2026 가을 기준 학기당 $11,775(뉴욕주 비거주자), 1년 $23,550입니다. IGC 기숙사는 17주 기준 2인실 127만 5,000원, 1인실 191만 2,500원입니다." },
-      { q: "송도 FIT를 졸업하면 뉴욕으로 갈 수 있나요?", a: "송도에서 AAS를 마친 뒤 뉴욕 캠퍼스 학사과정에 지원합니다. 진학이 보장되지는 않지만, 권장 마감일까지 지원하면 같은 전공 학사과정에 우선 고려를 받습니다." },
+      { q: "송도 FIT를 졸업하면 뉴욕으로 갈 수 있나요?", a: "송도에서 AAS를 마친 뒤 뉴욕 캠퍼스 학사과정에 지원합니다. 진학이 자동으로 보장되지는 않으며, 정해진 학사과정 지원 마감일까지 별도로 지원해야 합니다." },
       { q: "포트폴리오는 어떻게 준비하나요?", a: "패션디자인 지원자만 제출하며, FIT가 정한 과제 4개(에세이 1, 디자인 프로젝트 2, 봉제 프로젝트 1)를 원서 제출 후 온라인으로 냅니다." },
       { q: "봄학기에도 입학할 수 있나요?", a: "아니요. FIT는 매년 가을학기(9월)에만 신입생을 뽑습니다." },
       { q: "영어 점수가 모자라면 조건부입학이 되나요?", a: "FIT는 조건부입학을 받지 않습니다. TOEFL 80, IELTS 6.5, Duolingo 105, PTE 53 중 하나를 마감 전에 확보해야 합니다." },
@@ -494,12 +495,15 @@ export const UNI_GUIDES: Partial<Record<UniId, UniGuide>> = {
       { label: "SUNY Korea FIT 신입생 지원 안내", url: "https://www.sunykorea.ac.kr/adm/html/sub02/020102.html" },
       { label: "SUNY Korea FIT 학위·장학 안내", url: "https://www.sunykorea.ac.kr/adm/html/sub02/0207.html" },
       { label: "SUNY Korea 신입생 장학금", url: "https://sunykorea.ac.kr/costaid/html/sub05/050101.html" },
+      { label: "FIT 2025-26 학생 핸드북", url: "https://www.sunykorea.ac.kr/_prog/bbs/?mode=D&site_dvs_cd=en&menu_dvs_cd=030502&code=en_030502&file_id=5419" },
       { label: "FIT Korea 패션디자인 교육과정", url: "https://fd.sunykorea.ac.kr/fd/html/sub02/0203.html" },
       { label: "FIT Korea FAQ", url: "https://fd.sunykorea.ac.kr/fd/html/sub01/0108.html" },
       { label: "FIT 2026-27 Tuition and Fees", url: "https://catalog.fitnyc.edu/undergraduate/expensesandfinancialaid/tuitionandfees/" },
       { label: "FIT FBM 과정 (카탈로그 2026-27)", url: "https://catalog.fitnyc.edu/undergraduate/majors/twoyearassociatedegreeprograms/fashionbusinessmanagementmajor/" },
       { label: "IGC 기숙사 요금", url: IGC_DORM },
       { label: "FIT, 2025 세계 패션스쿨 순위 1위 (FashionUnited)", url: "https://fashionunited.com/education/news/fit-tops-2025-ranking-of-the-worlds-best-fashion-schools/2025120969561" },
+      { label: "FIT News — CEOWORLD 2019 1위", url: "https://news.fitnyc.edu/2019/04/11/best/" },
+      { label: "FIT News — SUNY Korea 과정 개설 (2017-05)", url: "https://news.fitnyc.edu/2017/05/16/fit-launches-fashion-design-and-fashion-business-management-programs-at-suny-korea/" },
       { label: "FIT News — SUNY Korea 개교 (2017-10)", url: "https://news.fitnyc.edu/2017/10/16/fit-president-and-delegation-attend-opening-events-at-fit-at-suny-korea/" },
     ],
     verifiedAt: "2026-10-26",
