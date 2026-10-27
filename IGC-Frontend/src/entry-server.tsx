@@ -27,6 +27,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   { path: "/promo/pricing" },
   { path: "/promo/diagnosis" },
   { path: "/promo/english" },
+  { path: "/promo/ghent-exam" },
   { path: "/promo/apps" },
   { path: "/promo/blog" },
   ...BLOG_POSTS.map((p) => ({ path: `/promo/blog/${p.slug}`, lastmod: p.updated ?? p.date })),

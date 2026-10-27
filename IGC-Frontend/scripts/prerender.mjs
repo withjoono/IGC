@@ -10,10 +10,10 @@
 //
 // index.html 원본의 브랜드 마커 블록은 건드리지 않는다(Hub sync_brand.py 소유). 출력물만 후처리한다.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist");
 const SSR_DIR = path.join(ROOT, "dist-ssr");
 const SITE_URL = (process.env.SITE_URL || "https://tigc.kr").replace(/\/+$/, "");

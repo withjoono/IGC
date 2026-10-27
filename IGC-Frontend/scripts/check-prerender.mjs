@@ -6,9 +6,10 @@
 import http from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
-const DIST = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "dist");
+const DIST = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "dist");
 const PORT = 4173;
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon", ".xml": "application/xml", ".txt": "text/plain" };
 

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tigc.kr/</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities/ghent</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities/sbu</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities/utah</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities/gmu</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/universities/fit</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/deadlines</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/parallel</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/pricing</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/diagnosis</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/english</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/apps</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/blog</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://tigc.kr/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities/ghent</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities/sbu</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities/utah</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities/gmu</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/universities/fit</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/deadlines</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/parallel</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/pricing</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/diagnosis</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/english</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/ghent-exam</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/apps</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/blog</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://tigc.kr/promo/blog/naesin-5-igc</loc><lastmod>2026-07-01</lastmod></url>
   <url><loc>https://tigc.kr/promo/blog/igc-2027-deadlines</loc><lastmod>2026-07-01</lastmod></url>
   <url><loc>https://tigc.kr/promo/blog/ghent-entrance-exam</loc><lastmod>2026-07-08</lastmod></url>
@@ -32,10 +33,10 @@
   <url><loc>https://tigc.kr/promo/blog/igc-careers-after-graduation</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://tigc.kr/promo/blog/igc-by-major</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://tigc.kr/promo/blog/igc-vs-domestic-university</loc><lastmod>2026-10-26</lastmod></url>
-  <url><loc>https://tigc.kr/promo/consulting</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/cases</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/consult</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/igcclass</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/igcclass/study</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://tigc.kr/promo/igcclass/grade</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://tigc.kr/promo/consulting</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/cases</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/consult</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/igcclass</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/igcclass/study</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://tigc.kr/promo/igcclass/grade</loc><lastmod>2026-10-27</lastmod></url>
 </urlset>
