@@ -1,0 +1,51 @@
+name: Deploy IGC Frontend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "IGC-Frontend/**"
+      - ".github/workflows/deploy-igc.yml"
+  workflow_dispatch:
+
+# 동시 배포 방지
+concurrency:
+  group: deploy-igc-front
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: IGC-Frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: IGC-Frontend/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # dist에 dev URL(localhost) 유출 차단 (Hub CLAUDE.md 권고)
+      - name: Guard against localhost in bundle
+        run: |
+          if grep -rq "localhost" dist/assets/*.js; then
+            echo "::error::localhost leaked into production bundle"; exit 1;
+          fi
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      # 가드레일: 반드시 igc 타깃만 배포 (ts-front-479305/igc-front)
+      - name: Deploy to Firebase Hosting (igc only)
+        run: npx firebase-tools@latest deploy --only hosting:igc --project ts-front-479305 --non-interactive
