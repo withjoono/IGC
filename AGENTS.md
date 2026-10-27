@@ -151,13 +151,19 @@ npm run deploy:firebase        # = npm run build && firebase deploy --only hosti
 
 포트는 생태계 전역 레지스트리다. T IGC 는 **3024** 고정(`vite.config.ts` 의 `strictPort: true`). 특화대학형 대역: 과기원 3021 · 사관학교 3022 · Medi 3023 · **T IGC 3024**. 백엔드 포트는 없다.
 
-### 8. 콘텐츠는 정적 소스 — 빌드 전 sitemap 생성이 필수
+### 8. 콘텐츠는 정적 소스 — 빌드가 프리렌더·sitemap 까지 만든다
 
-- 대학·학과·정원 데이터는 `src/data/igc.ts`(그 외 `photos.ts` · `programs.ts`)에 **정적으로** 들어 있다. 코드 주석대로 나중에 Hub 백엔드/CMS 로 교체할 수 있게 분리해 둔 것이다.
-- `npm run build` 는 `node scripts/generate-sitemap.mjs && tsc -b && vite build` 순이다. **라우트를 추가하면 `scripts/generate-sitemap.mjs` 의 목록에도 넣어야** sitemap 에 반영된다.
+- 대학·학과·정원 데이터는 `src/data/igc.ts`(그 외 `uni-guides.ts` · `guide-posts.ts` · `photos.ts` · `programs.ts`)에 **정적으로** 들어 있다. 코드 주석대로 나중에 Hub 백엔드/CMS 로 교체할 수 있게 분리해 둔 것이다.
+- `npm run build` 는 `vite build` → `vite build --ssr src/entry-server.tsx --outDir dist-ssr` → `tsc -b` → `node scripts/prerender.mjs` 순이다. 프리렌더는 **선택이 아니라 빌드의 일부**다(React 서버 렌더링, Chromium 불필요).
+  - 라우트마다 `dist/<경로>/index.html` 을 만들고, 같은 목록으로 `dist/sitemap.xml`·`public/sitemap.xml` 을 생성한다. `public/sitemap.xml` 은 빌드 산출물이니 손으로 고치지 말 것.
+  - **라우트를 추가하면 `src/entry-server.tsx` 의 `PRERENDER_ROUTES` 에 넣는다.** 대학(`UNIVERSITIES`)·블로그(`BLOG_POSTS`)는 데이터에서 자동 포함된다.
+  - 페이지에 `<Seo>` 가 없거나 렌더가 200이 아니면 빌드가 실패한다.
+  - 브랜드 블록의 사이트 공통 canonical·description·OG 는 **출력물에서만** 지우고 페이지별 `<Seo>` 값으로 교체한다. `index.html` 원본 블록은 건드리지 않는다.
 - `tsc -b` 가 빌드 게이트다 — **타입 에러로 빌드가 깨진다.**
+- "지금" 시각에 따라 바뀌는 값(D-day·연도)은 `src/lib/now.ts` 의 `useNow()` 로만 렌더한다. 렌더 중 `Date.now()` 직접 사용 금지 — hydration 불일치(#418)가 난다.
 - `src/routeTree.gen.ts` 와 `.tanstack` 은 자동 생성물이며 `.gitignore` 대상이다. 손으로 고치지 말 것.
-- 프리렌더(`npm run prerender`, react-snap)는 **선택**이며 대상 라우트는 `package.json` 의 `reactSnap.include` 에 있다. puppeteer/Chromium 을 받으므로 기본 의존성에서 분리돼 있다.
+- `@tskool/satellite-header` 가 `file:../../Music_College/packages/satellite-header` 로 걸려 있다 — **`E:\Dev\github\Music_College` 체크아웃이 있어야 `npm ci` 가 된다.**
+- 선택 점검: `scripts/check-prerender.mjs` 가 sitemap 전 URL 을 브라우저로 열어 hydration 오류·head 태그 개수를 본다(playwright 별도 설치).
 
 ### 9. DB 를 직접 붙일 일이 생기면
 
@@ -183,15 +189,15 @@ npm run deploy:firebase        # = npm run build && firebase deploy --only hosti
 ```bash
 cd IGC-Frontend
 
-npm install
+npm ci                 # ../../Music_College 체크아웃 필요 (satellite-header)
 npm run dev            # http://localhost:3024 → /promo
-npm run build          # sitemap 생성 + tsc -b + vite build → dist/
+npm run build          # vite build → SSR 빌드 → tsc -b → 프리렌더 + sitemap → dist/
 npm run preview        # :3024
 npm run lint           # eslint --max-warnings 0
-npm run gen:sitemap
-npm run prerender      # 선택. react-snap 별도 설치 필요
+# (선택) npm i -D playwright && npx playwright install chromium && node scripts/check-prerender.mjs
 
 npm run deploy:firebase   # build + firebase deploy --only hosting:igc
+# 소유확인 메타: GOOGLE_SITE_VERIFICATION=… NAVER_SITE_VERIFICATION=… npm run deploy:firebase
 ```
 
 **금지:** `firebase deploy --only hosting` (target 생략) · `git add .` (루트 개인정보 문서) · `index.html` 의 브랜드 마커 블록 직접 수정 · `src/routeTree.gen.ts` 수동 편집.

@@ -20,8 +20,8 @@ type: reference
 
 `IGC-Frontend/firebase.json` — hosting 블록 1개.
 
-- `"target": "igc"`, `public: "dist"`
-- SPA rewrite: `**` → `/index.html`
+- `"target": "igc"`, `public: "dist"`, `trailingSlash: false`
+- SPA rewrite: `**` → `/index.html` — 프리렌더된 `dist/<경로>/index.html` 이 있으면 그 파일이 먼저 서빙되고, 없는 경로만 fallback 으로 간다
 - 캐시 헤더: `**/index.html` → `no-cache, no-store, must-revalidate` / 이미지·`js`·`css` → `max-age=31536000, immutable`
 
 배포:
@@ -44,6 +44,7 @@ npm run deploy:firebase   # npm run build && firebase deploy --only hosting:igc
 - 단계: `npm ci` → `npm run build` → **번들에 `localhost` 가 남으면 실패**(dev URL 유출 가드) → `google-github-actions/auth@v2` → `firebase deploy --only hosting:igc --project ts-front-479305`.
 - 필요한 GitHub 시크릿: **`FIREBASE_SERVICE_ACCOUNT`** (`ts-front-479305` 에 Firebase Hosting 배포 권한이 있는 서비스 계정 JSON). 2026-10-25 `gh secret list -R withjoono/IGC` 실측 결과 **등록된 시크릿이 없다** → 등록 전까지 워크플로는 인증 단계에서 실패한다. 그동안은 수동 `npm run deploy:firebase`.
 - 동시 배포 방지: `concurrency: deploy-igc-front` (진행 중 배포 취소).
+- ⚠️ `package.json` 의 `@tskool/satellite-header` 가 `file:../../Music_College/packages/satellite-header` 다. 워크플로는 IGC 리포만 체크아웃하므로 **시크릿을 등록해도 `npm ci` 단계에서 실패한다.** Actions 배포를 쓰려면 워크플로에서 `withjoono/Music_College` 를 `../Music_College` 위치에 추가 체크아웃하거나, 패키지를 레지스트리로 배포해야 한다.
 
 ## 도메인 tigc.kr
 
@@ -52,7 +53,7 @@ npm run deploy:firebase   # npm run build && firebase deploy --only hosting:igc
 `IGC-Frontend/index.html` `<body>` 최상단 인라인 스크립트:
 
 ```js
-var legacyHosts = ["igc-front.web.app", "igc-front.firebaseapp.com"];
+var legacyHosts = ["igc-front.web.app", "igc-front.firebaseapp.com", "www.tigc.kr"];
 if (legacyHosts.indexOf(location.hostname) !== -1) {
   location.replace("https://tigc.kr" + location.pathname + location.search + location.hash);
 }
@@ -60,7 +61,7 @@ if (legacyHosts.indexOf(location.hostname) !== -1) {
 
 **이 스크립트를 지우지 말 것.** 지우면 같은 사이트가 두 도메인에서 동시에 서빙되어 SEO 중복이 생긴다.
 
-`SITE_URL`(기본 `https://tigc.kr`)은 `scripts/generate-sitemap.mjs` 가 sitemap/canonical 에 쓴다.
+`SITE_URL`(기본 `https://tigc.kr`)은 `scripts/prerender.mjs` 가 sitemap 에 쓴다(페이지 canonical 은 `src/lib/utils` 의 `SITE_URL`). 검색엔진 소유 확인 메타는 배포 시 환경변수로 주입한다: `GOOGLE_SITE_VERIFICATION=… NAVER_SITE_VERIFICATION=… npm run deploy:firebase` (저장소에 하드코딩하지 않음).
 
 ## 브랜드 자산
 

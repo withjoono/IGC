@@ -87,14 +87,22 @@ TanStack Router **파일기반** 라우팅이다. `src/routeTree.gen.ts` 와 `.t
 ## 빌드 파이프라인
 
 ```
-npm run build = node scripts/generate-sitemap.mjs  →  tsc -b  →  vite build
+npm run build = vite build                                   (클라이언트 → dist/)
+              → vite build --ssr src/entry-server.tsx --outDir dist-ssr
+              → tsc -b                                      (타입 게이트)
+              → node scripts/prerender.mjs                  (라우트별 HTML + sitemap)
 ```
 
-- **라우트를 추가하면 `scripts/generate-sitemap.mjs` 의 목록에도 넣어야 한다.** 그 스크립트는 라우트를 자동 탐색하지 않고 하드코딩된 배열(`unis`, `blog`, `routes`)을 쓴다. 넣지 않으면 sitemap 에서 누락된다.
+- 프리렌더는 **빌드의 일부**다(별도 명령 없음, Chromium 불필요). `dist-ssr/entry-server.js` 의 `render(url)` 로 React 서버 렌더링해 `dist/<경로>/index.html` 을 만든다. `dist/index.html`(= `/` 와 SPA fallback)은 `/promo` 렌더 결과 + canonical `https://tigc.kr/`.
+- **라우트를 추가하면 `src/entry-server.tsx` 의 `PRERENDER_ROUTES` 에 넣는다.** 대학(`UNIVERSITIES`)·블로그(`BLOG_POSTS`)는 데이터에서 자동 포함. sitemap(`dist/sitemap.xml`·`public/sitemap.xml`)도 같은 목록으로 생성된다 — 예전 `generate-sitemap.mjs`·react-snap 설정은 삭제됐다.
+- 페이지에 `<Seo>` 가 없거나 렌더가 200이 아니면 빌드 실패.
+- 브랜드 블록의 사이트 공통 canonical·description·OG 는 출력물에서만 지우고 페이지별 값으로 교체한다(원본 `index.html` 은 그대로).
+- 클라이언트(`src/main.tsx`)는 `#root[data-ssr-path]` 가 현재 경로와 같을 때만 hydrate 한다. D-day·연도처럼 시각에 따라 바뀌는 값은 `src/lib/now.ts` 의 `useNow()` 로 렌더 — 렌더 중 `Date.now()` 직접 사용 금지(hydration 불일치 #418).
+- `firebase.json` `trailingSlash: false` — `/promo/x/` 는 `/promo/x` 로 301, `/promo/x` 는 `dist/promo/x/index.html` 을 준다(canonical 과 일치).
 - `tsc -b` 가 빌드 게이트다 — **타입 에러로 빌드가 깨진다**(Hub 프론트와 다르다).
 - `npm run lint` 는 `--max-warnings 0` 이라 경고도 실패다.
-- 프리렌더는 선택: `npm run prerender`(react-snap). 대상 라우트는 `package.json` 의 `reactSnap.include`. puppeteer/Chromium 을 받으므로 기본 의존성에서 분리돼 있다. Chromium 다운로드가 막히면 Hosting 단 동적 렌더링이나 별도 SSG 로 대체한다.
-- SEO 는 `react-helmet-async` 기반 `src/components/seo.tsx`(기본 OG 이미지는 `https://www.tskool.kr/logo.png`).
+- SEO 는 `react-helmet-async` 기반 `src/components/seo.tsx`(기본 OG 이미지는 `https://www.tskool.kr/logo.png`). JSON-LD: BreadcrumbList·BlogPosting·CollegeOrUniversity·FAQPage.
+- 선택 점검: `node scripts/check-prerender.mjs`(playwright 필요) — sitemap 전 URL 의 hydration 오류·head 태그 개수 확인.
 
 ## 외부 링크 의존
 
