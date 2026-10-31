@@ -68,7 +68,7 @@ export const HEADER_NAV: HeaderNavItem[] = [
   { href: "/promo/deadlines", label: "2027 원서 마감일" },
   { href: "/promo/english", label: "어학 우회로·대행" },
   { href: "/promo/ghent-exam", label: "겐트 시험 대비반" },
-  { href: "/promo/cases", label: "합격 사례" },
+  { href: "/promo/cases", label: "합격 전략 예시" },
   { href: "/promo/igcclass/study", label: "스터디플래너 앱 소개" },
   { href: "/promo/igcclass/grade", label: "생기북 앱 소개" },
   { href: "tel:01025187139", label: "전화 상담 010-2518-7139" },

@@ -1,6 +1,6 @@
 import { daysUntil, useNow } from "@/lib/now";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarClock, GraduationCap, Globe2, Sparkles, CalendarCheck, LineChart, ShieldCheck, PackageCheck, Phone } from "lucide-react";
+import { ArrowRight, CalendarClock, GraduationCap, Globe2, Sparkles, CalendarCheck, LineChart, ShieldCheck, PackageCheck, Phone, FlaskConical } from "lucide-react";
 import { Seo } from "@/components/seo";
 import { ConsultCTA } from "@/components/layout";
 import { StatBand } from "@/components/ui";
@@ -40,7 +40,7 @@ function Landing() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
             IGC는 수시 6회에 안 걸리는 보험 한 장 — 미리 들어두고 수시는 소신 지원하세요.
-            어학 성적이 없어도 수능영어·Versant 하나면 되고, 전형 선택부터 생기부·에세이·원서·마감까지 전부 대행합니다.
+            어학 성적이 없어도 수능영어·Versant 하나면 되고, 전형 선택부터 생기부 정리·에세이 첨삭·원서·마감까지 전부 맡아 드립니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/promo/consult" className="inline-flex items-center gap-2 rounded-lg bg-igc-blue px-6 py-3 font-semibold text-white hover:bg-igc-navy">
@@ -77,7 +77,7 @@ function Landing() {
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-blue/10 text-igc-blue"><PackageCheck className="h-5 w-5" /></div>
             <p className="mt-4 text-xs font-semibold text-igc-blue">① 올인원 완전 대행</p>
             <h3 className="mt-1 text-lg font-bold text-igc-navy">학생은 공부만 하세요</h3>
-            <p className="mt-2 text-sm text-muted-foreground">전형 선택·어학 최소경로·생기부·에세이·원서·마감까지 전부 대행. 영어 점수 없어도 6가지 길.</p>
+            <p className="mt-2 text-sm text-muted-foreground">전형 선택·어학 최소경로·생기부 정리·에세이 첨삭·원서·마감까지 한 팀이 맡습니다. 영어 점수 없어도 6가지 길.</p>
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-blue group-hover:gap-2">올인원 서비스 <ArrowRight className="h-3.5 w-3.5" /></span>
           </Link>
           <Link to="/promo/igcclass" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-mint/5 to-white p-6 transition hover:border-igc-mint hover:shadow-md">
@@ -95,6 +95,21 @@ function Landing() {
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-navy group-hover:gap-2">수시 병행 전략 <ArrowRight className="h-3.5 w-3.5" /></span>
           </Link>
         </div>
+      </section>
+
+      {/* 겐트 입학시험 대비반 */}
+      <section className="container">
+        <Link to="/promo/ghent-exam" className="group flex flex-col gap-4 rounded-2xl border-2 border-igc-mint/30 bg-gradient-to-r from-igc-mint/10 to-white p-6 transition hover:border-igc-mint md:flex-row md:items-center md:justify-between md:p-8">
+          <div className="flex items-start gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-igc-mint/15 text-igc-mint"><FlaskConical className="h-5 w-5" /></div>
+            <div>
+              <p className="text-xs font-semibold text-igc-mint">겐트대 지원자라면</p>
+              <h2 className="mt-1 text-lg font-bold text-igc-navy md:text-xl">내신 대신 수학·화학 시험으로 갈리는 겐트대, 시험 대비반으로 준비하세요</h2>
+              <p className="mt-1 text-sm text-muted-foreground">선생님 온라인 강의 + 실전 온라인 모의고사로 합격선을 목표로 준비합니다.</p>
+            </div>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-igc-mint group-hover:gap-2">겐트 시험 대비반 <ArrowRight className="h-4 w-4" /></span>
+        </Link>
       </section>
 
       <section className="container py-14">

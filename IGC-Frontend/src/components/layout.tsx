@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Phone } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { useNow } from "@/lib/now";
 export { Header } from "./header";
 
 export const CONSULT_PHONE = "010-2518-7139";
 export const CONSULT_TEL = "tel:01025187139";
+// 카카오톡 채널 채팅 주소(예: "https://pf.kakao.com/_xxxxx/chat"). 비워 두면 카톡 버튼이 숨겨진다.
+export const KAKAO_CHANNEL_URL = "";
 
 export function Footer() {
   const year = new Date(useNow()).getFullYear();
@@ -62,6 +64,9 @@ export function ConsultCTA({ context }: { context?: string }) {
         <p className="mt-1 text-sm text-white/70">전화 한 통이면 바로 상담됩니다</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <a href={CONSULT_TEL} className="rounded-lg bg-white px-6 py-3 font-semibold text-igc-navy hover:bg-white/90">전화 상담하기</a>
+          {KAKAO_CHANNEL_URL && (
+            <a href={KAKAO_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-[#FEE500] px-6 py-3 font-semibold text-[#191919] hover:brightness-95">카톡 상담</a>
+          )}
           <Link to="/promo/consult" className="rounded-lg border border-white/60 px-6 py-3 font-semibold text-white hover:bg-white/10">무료 입시 진단 신청</Link>
           <Link to="/promo/diagnosis" className="rounded-lg border border-white/60 px-6 py-3 font-semibold text-white hover:bg-white/10">1분 합격 가능성 진단</Link>
         </div>
@@ -72,15 +77,29 @@ export function ConsultCTA({ context }: { context?: string }) {
 
 export function FloatingCall() {
   return (
-    <a
-      href={CONSULT_TEL}
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-igc-blue px-5 py-3 font-bold text-white shadow-lg shadow-igc-blue/30 transition hover:bg-igc-navy"
-      aria-label={`전화 상담 ${CONSULT_PHONE}`}
-    >
-      <Phone className="h-5 w-5" />
-      <span className="hidden sm:inline">{CONSULT_PHONE}</span>
-      <span className="sm:hidden">전화 상담</span>
-    </a>
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
+      {KAKAO_CHANNEL_URL && (
+        <a
+          href={KAKAO_CHANNEL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-[#FEE500] px-5 py-3 font-bold text-[#191919] shadow-lg transition hover:brightness-95"
+          aria-label="카카오톡 상담"
+        >
+          <MessageCircle className="h-5 w-5" />
+          <span>카톡 상담</span>
+        </a>
+      )}
+      <a
+        href={CONSULT_TEL}
+        className="inline-flex items-center gap-2 rounded-full bg-igc-blue px-5 py-3 font-bold text-white shadow-lg shadow-igc-blue/30 transition hover:bg-igc-navy"
+        aria-label={`전화 상담 ${CONSULT_PHONE}`}
+      >
+        <Phone className="h-5 w-5" />
+        <span className="hidden sm:inline">{CONSULT_PHONE}</span>
+        <span className="sm:hidden">전화 상담</span>
+      </a>
+    </div>
   );
 }
 

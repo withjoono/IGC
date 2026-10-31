@@ -12,8 +12,8 @@ export const Route = createFileRoute("/promo/cases")({
 function Cases() {
   return (
     <>
-      <Seo title="IGC 합격 사례" description="내신 4·5등급, 어학 미제출에서도 합격한 실제 IGC 합격 사례. 성적이 아니라 전략이 만든 결과." path="/promo/cases" />
-      <PageHeader badge="합격 사례" title="성적이 아니라 전략이 만든 결과" desc="내신 중하위권·어학 부담 학생들이 어떤 전략으로 합격했는지 익명 사례로 정리했습니다." />
+      <Seo title="IGC 합격 전략 예시" description="내신 4·5등급, 어학 점수가 부족한 학생이 쓸 수 있는 IGC 지원 전략을 유형별 예시로 정리했습니다." path="/promo/cases" />
+      <PageHeader badge="합격 전략 예시" title="성적이 아니라 전략이 결과를 만듭니다" desc="내신 중하위권·어학 부담 학생이 쓸 수 있는 대표 전략을 유형별 예시로 정리했습니다. 실제 합격 사례는 학생·학부모 동의를 받아 순차적으로 공개합니다." />
 
       <section className="container grid gap-4 md:grid-cols-2">
         {CASES.map((c, i) => (
@@ -30,7 +30,7 @@ function Cases() {
         ))}
       </section>
 
-      <p className="container mt-6 text-xs text-muted-foreground">※ 개인정보 보호를 위해 익명 처리한 예시이며, 합격을 보장하지 않습니다.</p>
+      <p className="container mt-6 text-xs text-muted-foreground">※ 위 카드는 전략 유형을 보여 주는 예시이며 특정 학생의 실제 결과가 아닙니다. 합격을 보장하지 않습니다.</p>
 
       <ConsultCTA context="내 사례로 만들 차례입니다" />
     </>

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Compass, Map, FileEdit, Handshake, ArrowRight } from "lucide-react";
+import { Compass, Map, FileEdit, Handshake, ArrowRight, GraduationCap } from "lucide-react";
 import { Seo } from "@/components/seo";
 import { ConsultCTA, PageHeader } from "@/components/layout";
 import { SectionHead, StatBand } from "@/components/ui";
@@ -47,7 +47,7 @@ function Consulting() {
 
       <section className="container mt-14 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border-2 border-igc-blue/20 bg-igc-blue/5 p-8">
-          <SectionHead eyebrow="COST" title="컨설팅 비용은?" desc="첫 대학 98만원 / 추가 대학당 48만원. 전형 설계부터 원서 제출까지 전략적 대행." />
+          <SectionHead eyebrow="COST" title="컨설팅 비용은?" desc="첫 대학 98만원 / 추가 대학당 48만원. 전형 설계·에세이 첨삭·원서 제출·합격 후 절차까지 포함한 총액." />
           <Link to="/promo/pricing" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
             비용·대행 범위 자세히 보기 <ArrowRight className="h-4 w-4" />
           </Link>
@@ -57,6 +57,22 @@ function Consulting() {
           <Link to="/promo/igcclass" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
             IGC 멘토링 요금·구성 보기 <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+      </section>
+
+      <section className="container mt-14">
+        <div className="rounded-2xl border p-8">
+          <div className="flex items-center gap-2 text-igc-blue"><GraduationCap className="h-5 w-5" /><span className="text-sm font-semibold">합격 이후까지</span></div>
+          <h2 className="mt-3 text-xl font-bold text-igc-navy md:text-2xl">합격 통보에서 끝내지 않습니다</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            장학금 신청, 합격 수락·보증금 납부, 기숙사 신청, 입학 전 안내까지 함께합니다. 지원 단계부터 본교 학기·학위 구조와 졸업 후 진로(대학원·취업)를
+            같이 보고 대학을 고릅니다.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/promo/blog/$slug" params={{ slug: "igc-degree-home-campus" }} className="inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">본교 학위·본교 학기 <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/promo/blog/$slug" params={{ slug: "igc-careers-after-graduation" }} className="inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">졸업 후 진로 <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/promo/blog/$slug" params={{ slug: "igc-scholarships" }} className="inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">장학금 <ArrowRight className="h-4 w-4" /></Link>
+          </div>
         </div>
       </section>
 
