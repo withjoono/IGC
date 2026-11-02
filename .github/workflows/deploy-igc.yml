@@ -18,15 +18,44 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: IGC-Frontend
+        working-directory: IGC/IGC-Frontend
     steps:
+      # 필요한 시크릿이 없으면 여기서 이름을 찍고 멈춘다 (등록 방법: docs/context/deploy-and-domain.md)
+      - name: Check required secrets
+        working-directory: .
+        env:
+          SATELLITE_HEADER_TOKEN: ${{ secrets.SATELLITE_HEADER_TOKEN }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          missing=0
+          for s in SATELLITE_HEADER_TOKEN FIREBASE_SERVICE_ACCOUNT; do
+            if [ -z "${!s}" ]; then echo "::error::GitHub secret $s is not set"; missing=1; fi
+          done
+          exit $missing
+
       - uses: actions/checkout@v4
+        with:
+          path: IGC
+
+      # package.json 의 file:../../Music_College/packages/satellite-header 와 같은 디렉터리 구조.
+      # Music_College 는 비공개 리포라 읽기 권한 토큰이 필요하다. 헤더를 바꾸면 Music_College 에 푸시한 뒤 ref 를 올린다.
+      - name: Checkout shared satellite header
+        uses: actions/checkout@v4
+        with:
+          repository: withjoono/Music_College
+          ref: 4773978bb1ecba67d41105478e1dc8896576d2ff
+          path: Music_College
+          token: ${{ secrets.SATELLITE_HEADER_TOKEN }}
+          sparse-checkout: packages/satellite-header
+
+      - name: Verify shared header source
+        run: test -f ../../Music_College/packages/satellite-header/package.json
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: IGC-Frontend/package-lock.json
+          cache-dependency-path: IGC/IGC-Frontend/package-lock.json
 
       - name: Install
         run: npm ci
@@ -37,7 +66,8 @@ jobs:
       # dist에 dev URL(localhost) 유출 차단 (Hub CLAUDE.md 권고)
       - name: Guard against localhost in bundle
         run: |
-          if grep -rq "localhost" dist/assets/*.js; then
+          # 포트가 붙은 것만 본다 — TanStack Router 내부 기본값 "http://localhost" 는 dev URL 이 아니다
+          if grep -rqE "localhost:[0-9]+" dist/assets/*.js; then
             echo "::error::localhost leaked into production bundle"; exit 1;
           fi
 

@@ -41,10 +41,14 @@ npm run deploy:firebase   # npm run build && firebase deploy --only hosting:igc
 `.github/workflows/deploy-igc.yml`
 
 - 트리거: `main` 푸시 중 `IGC-Frontend/**` 또는 워크플로 파일 자체가 바뀐 경우 + 수동 `workflow_dispatch`. 문서만 바꾼 푸시는 배포되지 않는다.
-- 단계: `npm ci` → `npm run build` → **번들에 `localhost` 가 남으면 실패**(dev URL 유출 가드) → `google-github-actions/auth@v2` → `firebase deploy --only hosting:igc --project ts-front-479305`.
-- 필요한 GitHub 시크릿: **`FIREBASE_SERVICE_ACCOUNT`** (`ts-front-479305` 에 Firebase Hosting 배포 권한이 있는 서비스 계정 JSON). 2026-10-25 `gh secret list -R withjoono/IGC` 실측 결과 **등록된 시크릿이 없다** → 등록 전까지 워크플로는 인증 단계에서 실패한다. 그동안은 수동 `npm run deploy:firebase`.
+- 단계: 시크릿 존재 확인 → IGC 를 `IGC/` 에, `withjoono/Music_College` 의 `packages/satellite-header` 만 `Music_College/` 에 체크아웃(로컬과 같은 `../../Music_College` 구조, Sakwan 과 같은 방식) → `npm ci` → `npm run build` → **번들에 `localhost` 가 남으면 실패**(dev URL 유출 가드) → `google-github-actions/auth@v2` → `firebase deploy --only hosting:igc --project ts-front-479305`.
+- Music_College 는 **커밋 SHA 로 고정**돼 있다(`ref:`). 헤더를 바꿨으면 Music_College 에 먼저 푸시하고 워크플로의 `ref` 를 그 커밋으로 올린다.
+- 필요한 GitHub 시크릿 2개 — 없으면 첫 단계 `Check required secrets` 가 빠진 이름을 찍고 멈춘다.
+  - **`SATELLITE_HEADER_TOKEN`** — 비공개 리포 `withjoono/Music_College` 읽기 권한 토큰(fine-grained PAT, 해당 리포 Contents: Read-only). Sakwan 도 같은 이름을 쓴다.
+  - **`FIREBASE_SERVICE_ACCOUNT`** — `ts-front-479305` 에 Firebase Hosting 배포 권한이 있는 서비스 계정 JSON.
+  - 2026-11-02 `gh secret list -R withjoono/IGC` 실측: **둘 다 미등록.** 등록 전까지는 수동 `npm run deploy:firebase`. 등록: `gh secret set SATELLITE_HEADER_TOKEN -R withjoono/IGC` / `gh secret set FIREBASE_SERVICE_ACCOUNT -R withjoono/IGC < key.json`
 - 동시 배포 방지: `concurrency: deploy-igc-front` (진행 중 배포 취소).
-- ⚠️ `package.json` 의 `@tskool/satellite-header` 가 `file:../../Music_College/packages/satellite-header` 다. 워크플로는 IGC 리포만 체크아웃하므로 **시크릿을 등록해도 `npm ci` 단계에서 실패한다.** Actions 배포를 쓰려면 워크플로에서 `withjoono/Music_College` 를 `../Music_College` 위치에 추가 체크아웃하거나, 패키지를 레지스트리로 배포해야 한다.
+- ⚠️ 로컬에서 `IGC-Frontend/node_modules` 를 통째로 지우지 말 것 — `@tskool/satellite-header` 링크를 따라가 **Music_College 원본 파일까지 지워진다**(2026-10-27 실제 발생, git 으로 복구). 지워야 하면 그 링크부터 따로 끊는다.
 
 ## 도메인 tigc.kr
 
