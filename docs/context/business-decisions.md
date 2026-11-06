@@ -58,8 +58,13 @@ type: project
 ## 상담 전화
 
 - 공개 상담 번호(사이트 노출용): `010-2518-7139`.
-- 단일 상수 `CONSULT_PHONE` / `CONSULT_TEL` — `src/components/layout.tsx`. 헤더·푸터·ConsultCTA·전역 FloatingCall 이 이 상수를 쓴다.
-- ⚠️ 상수를 안 쓰는 하드코딩이 남아 있다: `src/data/header.ts`(`tel:01025187139`), `src/routes/promo/index.tsx`(히어로). 번호를 바꾸면 여기도 같이 고친다.
+- 단일 상수 `CONSULT_PHONE` / `CONSULT_TEL` — `src/components/layout.tsx`. 푸터·ConsultCTA·전역 FloatingCall 이 이 상수를 쓴다. (헤더 가로 메뉴의 전화 항목은 2026-11-06 메뉴 정리 때 뺐다 — 전역 FloatingCall 과 중복)
+- ⚠️ 상수를 안 쓰는 하드코딩이 남아 있다: `src/routes/promo/index.tsx`(히어로). 번호를 바꾸면 여기도 같이 고친다.
+
+## 헤더 메뉴 (2026-11-06 정리)
+
+- 메가메뉴 `HEADER_GROUPS` 5그룹(성적관리·학습관리·입시예측·입시정보·사용자별)은 위성앱 공통 분류라 그대로 둔다.
+- 가로 메뉴 `HEADER_NAV` 는 **핵심 6개만**: 올인원 서비스 · 수시 병행 · IGC 멘토링 · 컨설팅 비용 · 블로그 · 무료 상담 신청. 대학 비교·마감일·어학·겐트 대비반·진단·앱 소개·합격 전략 예시는 메가메뉴와 본문 링크로 닿는다. 가로 메뉴를 다시 늘리지 말 것(사용자 요청: "헤더가 너무 복잡").
 
 ## 연계 앱 링크 (외부)
 

@@ -39,7 +39,7 @@ export const HEADER_GROUPS: HeaderGroup[] = [
     tools: [
       { title: "5개 대학 비교", description: "대학별 학과·전형·학비·어학 요건을 비교하세요.", app: "T IGC", url: "/promo/universities" },
       { title: "2027 원서 마감일", description: "학기와 전형 단계별 지원 일정을 확인하세요.", app: "T IGC", url: "/promo/deadlines" },
-      { title: "수시와 IGC 병행", description: "국내 대입과 IGC 지원을 함께 준비하는 전략을 살펴보세요.", app: "T IGC", url: "/promo/parallel" },
+      { title: "합격 전략 예시", description: "내신·어학 상황별로 쓸 수 있는 IGC 지원 전략 예시를 살펴보세요.", app: "T IGC", url: "/promo/cases" },
     ],
     note: "전형과 일정은 변경될 수 있으므로 지원 전 각 대학의 공식 모집요강을 확인하세요.",
   },
@@ -55,23 +55,15 @@ export const HEADER_GROUPS: HeaderGroup[] = [
   },
 ];
 
-// 기존 콘텐츠 메뉴의 모든 목적지를 공통 패키지의 가로 스크롤 메뉴로 유지합니다.
+// 가로 메뉴는 핵심 서비스만 둔다. 나머지 목적지(대학 비교·마감일·어학·겐트 대비반·진단·앱 소개)는
+// 위 HEADER_GROUPS 메가메뉴와 각 페이지 본문 링크로 연결된다. 전화 상담은 전역 FloatingCall·푸터에 있다.
 export const HEADER_NAV: HeaderNavItem[] = [
-  { href: "/promo/blog", label: "블로그", match: "prefix" },
-  { href: "/promo/parallel", label: "수시 병행" },
-  { href: "/promo/pricing", label: "컨설팅 비용" },
-  { href: "/promo/diagnosis", label: "합격진단" },
   { href: "/promo/consulting", label: "올인원 서비스" },
-  { href: "/promo/igcclass", label: "IGC 멘토링" },
+  { href: "/promo/parallel", label: "수시 병행" },
+  { href: "/promo/igcclass", label: "IGC 멘토링", match: "prefix" },
+  { href: "/promo/pricing", label: "컨설팅 비용" },
+  { href: "/promo/blog", label: "블로그", match: "prefix" },
   { href: "/promo/consult", label: "무료 상담 신청" },
-  { href: "/promo/universities", label: "대학 비교", match: "prefix" },
-  { href: "/promo/deadlines", label: "2027 원서 마감일" },
-  { href: "/promo/english", label: "어학 우회로·대행" },
-  { href: "/promo/ghent-exam", label: "겐트 시험 대비반" },
-  { href: "/promo/cases", label: "합격 전략 예시" },
-  { href: "/promo/igcclass/study", label: "스터디플래너 앱 소개" },
-  { href: "/promo/igcclass/grade", label: "생기북 앱 소개" },
-  { href: "tel:01025187139", label: "전화 상담 010-2518-7139" },
 ];
 
 export const HEADER_UTILITIES: HeaderUtilitiesConfig = {
