@@ -107,20 +107,11 @@ DB를 수정하는 모든 스크립트는 **인자 없이 실행하면 DRY-RUN**
 - 백엔드 호출 지점은 딱 하나 — 상담 신청 폼 `src/routes/promo/consult.tsx` 의 `fetch("/api-nest/igc/consult", { method: "POST" })`.
 - `/api-nest` 는 **dev 전용 프록시**다(`vite.config.ts` → `http://localhost:4000` 로 rewrite). **프로덕션에는 이 rewrite 가 없다.**
 
-### 3. 상담 신청 폼은 프로덕션에서 조용히 유실된다 (확인 필요)
+### 3. 상담 신청 폼 — 접수 API 가 아직 없다 (2026-11-11)
 
-`consult.tsx` 는 이렇게 생겼다:
-
-```ts
-await fetch("/api-nest/igc/consult", { method: "POST", ... }).catch(() => {});
-// finally
-setSent(true);   // 실패해도 "접수되었습니다" 화면
-```
-
-- 프로덕션에는 `/api-nest` rewrite 가 없고 `firebase.json` 의 SPA rewrite(`**` → `/index.html`)가 걸린다 → POST 가 **HTML 을 200 으로 받는다.** 그리고 `.catch(() => {})` 가 에러도 삼킨다.
-- 즉 **사용자에게는 접수 완료로 보이지만 어디에도 저장되지 않을 수 있다.**
-- 손대기 전에 확인할 것: Hub 백엔드에 `POST /igc/consult` 엔드포인트가 실제로 있는지, Firebase Hosting 에 `/api-nest` rewrite 를 추가할지 절대 URL 로 바꿀지. **확인 전까지 "상담 신청이 들어오고 있다"고 가정하지 말 것.**
-- 고칠 때는 **실패를 사용자에게 노출**하도록 바꾼다(`.catch(()=>{})` 로 삼키지 않기).
+- Hub-Backend 에 IGC 상담 접수 엔드포인트(`/igc/consult` 등)가 **없다**(2026-11-11 코드 검색으로 확인). 예전 폼은 실패를 삼키고 "접수 완료"를 보여 신청이 유실됐을 수 있다.
+- 지금 `consult.tsx` 는: 빌드 환경변수 `VITE_CONSULT_ENDPOINT` 가 있으면 그 절대 URL 로 POST 하고 **2xx 일 때만** 접수 완료. 없거나 실패하면 작성 내용을 상담 번호(`CONSULT_PHONE`)로 **문자 보내기**·전화·복사 화면으로 넘긴다. 실패를 삼키지 말 것.
+- 접수 API 를 Hub 에 만들면 `VITE_CONSULT_ENDPOINT` 만 설정하면 된다(CORS 에 https://tigc.kr 허용 필요).
 
 ### 4. 배포 — target 생략 금지
 
@@ -131,6 +122,7 @@ npm run deploy:firebase        # = npm run build && firebase deploy --only hosti
 - **`firebase deploy --only hosting` 단독 금지.** 2026-05-16 에 생기북 빌드가 target 없이 배포되어 Hub 의 `ts-front-479305` site 를 덮어쓰고 `www.tskool.kr` 이 생기북을 서빙한 사고가 있었다.
 - `.firebaserc` 의 target 이름은 **`igc`**, 실제 site 는 **`igc-front`** 다. 이름이 다르니 헷갈리지 말 것.
 - `firebase.json` 에는 자기 hosting 블록 **하나만** 둔다. 캐시 헤더가 이미 설정돼 있다 — `index.html` 은 `no-cache`, 이미지·js·css 는 `immutable` 1년.
+- `firebase.json` rewrite 는 **`/promo/**` 만** `/index.html` 로 보낸다(2026-11-11). 그 밖의 없는 주소는 `dist/404.html`(noindex)을 404 로 받는다. `/promo` 밖에 클라이언트 라우트를 새로 만들면 rewrite 를 추가할 것.
 - 도메인 전환은 클라이언트에서 처리한다: `index.html` 인라인 스크립트가 `igc-front.web.app` / `igc-front.firebaseapp.com` 접속을 `https://tigc.kr` 로 `location.replace` 한다. **이 스크립트를 지우지 말 것.**
 
 ### 5. 브랜드 자산은 Hub `brand/` 가 단일 원본
@@ -163,6 +155,8 @@ npm run deploy:firebase        # = npm run build && firebase deploy --only hosti
 - "지금" 시각에 따라 바뀌는 값(D-day·연도)은 `src/lib/now.ts` 의 `useNow()` 로만 렌더한다. 렌더 중 `Date.now()` 직접 사용 금지 — hydration 불일치(#418)가 난다.
 - `src/routeTree.gen.ts` 와 `.tanstack` 은 자동 생성물이며 `.gitignore` 대상이다. 손으로 고치지 말 것.
 - `@tskool/satellite-header` 가 `file:../../Music_College/packages/satellite-header` 로 걸려 있다 — **`E:\Dev\github\Music_College` 체크아웃이 있어야 `npm ci` 가 된다.**
+- 빌드는 `dist/llms.txt`(AI 검색용 요약)와 `dist/404.html` 도 만든다. sitemap lastmod 는 빌드일이 아니라 `entry-server.tsx` 의 `CONTENT_UPDATED`·라우트별 `lastmod` — 페이지 내용을 실제로 고쳤을 때만 올린다.
+- `public/google*.html` 은 구글 서치콘솔 소유확인 파일이다. 지우지 말 것.
 - 선택 점검: `scripts/check-prerender.mjs` 가 sitemap 전 URL 을 브라우저로 열어 hydration 오류·head 태그 개수를 본다(playwright 별도 설치).
 
 ### 9. DB 를 직접 붙일 일이 생기면
