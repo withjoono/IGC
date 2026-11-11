@@ -12,6 +12,15 @@ export const Route = createFileRoute("/promo/pricing")({
 const BASE = 98; // 첫 대학 (만원)
 const ADD = 48; // 추가 대학당 (만원)
 const total = (n: number) => BASE + ADD * (n - 1);
+const PER_SCHOOL = 77; // 비교 기준: 학교당 정액 수속 대행형(에세이·번역·공증 별도) 공개가 — 2026-11-11 확인
+
+// 국내 수시·정시 컨설팅을 다른 곳에 따로 맡길 때의 시장 가격대 (언론 보도 기준)
+const SEPARATE = [
+  { item: "IGC 수속 대행 (학교당 정액형, 2개교)", price: "154만원 + 에세이 별도", src: "공개 요금표, 2026-11-11 확인" },
+  { item: "에세이 첨삭 (외부 상품, 1편)", price: "15만~35만원", src: "프리랜서 마켓 공개 상품" },
+  { item: "국내 수시(학생부) 컨설팅", price: "학기당 200만~400만원", src: "이투데이 2026-04-06" },
+  { item: "국내 정시 상담", price: "1회 40만~80만원", src: "이투데이 2026-04-06" },
+];
 
 // 기본가에 포함되는 항목 — 다른 곳 견적과 비교할 때 확인할 체크리스트
 const INCLUDED = [
@@ -38,7 +47,7 @@ function Pricing() {
     <>
       <Seo
         title="컨설팅 비용 안내 — 첫 대학 98만 / 추가 48만, 에세이 첨삭 포함"
-        description="IGC 입시 컨설팅 요금. 첫 대학 98만원, 추가 대학당 48만원. 전략 설계·에세이 첨삭·원서 제출·합격 후 절차까지 포함한 총액입니다."
+        description="IGC 입시 컨설팅 요금. 첫 대학 98만원, 추가 대학당 48만원 — 에세이 첨삭·원서 제출·합격 후 절차 포함. 학교당 수속형 업체와 총액 비교, 국내 수시·정시까지 한 팀 상담."
         path="/promo/pricing"
       />
       <PageHeader
@@ -122,6 +131,61 @@ function Pricing() {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* 비교 */}
+      <section className="container mt-12">
+        <SectionHead
+          eyebrow="다른 곳과 비교"
+          title="학교당 수속비만 보면 싸 보여도, 총액은 다릅니다"
+          desc="IGC 수속을 학교당 정액으로 받는 곳은 보통 에세이·번역·공증이 별도입니다. 1개교는 저희가 비싸지만, 2개교부터는 에세이를 넣지 않아도 저희가 낮습니다."
+        />
+        <div className="mt-6 overflow-x-auto rounded-2xl border">
+          <table className="w-full min-w-[520px] text-sm">
+            <thead className="bg-slate-50 text-left text-muted-foreground">
+              <tr><th className="p-3">지원 대학 수</th><th className="p-3">T IGC (에세이 첨삭 포함)</th><th className="p-3">학교당 정액 수속형 (에세이 별도)</th></tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4].map((k) => (
+                <tr key={k} className="border-t">
+                  <td className="p-3 font-medium text-igc-navy">{k}개 대학</td>
+                  <td className="p-3 font-semibold text-igc-blue">{total(k)}만원</td>
+                  <td className="p-3 text-foreground/80">{PER_SCHOOL * k}만원 + 에세이 첨삭비</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">비교 기준: IGC 전용 요금을 공개한 수속 대행 업체의 학교당 77만원(입학신청비·에세이·자소서·번역·공증 불포함), 2026-11-11 사이트 표기 기준. 업체 사정에 따라 바뀔 수 있습니다.</p>
+
+        <div className="mt-10 rounded-2xl border-2 border-igc-navy/15 p-6 md:p-8">
+          <p className="text-sm font-semibold text-igc-blue">수시·정시까지 생각한다면</p>
+          <h3 className="mt-1 text-xl font-bold text-igc-navy">IGC 유학원·수시 컨설팅·정시 상담을 따로 다니면</h3>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[520px] text-sm">
+              <thead className="text-left text-muted-foreground">
+                <tr><th className="py-2 pr-3">따로 맡기는 항목</th><th className="py-2 pr-3">시장 가격대</th><th className="py-2">기준</th></tr>
+              </thead>
+              <tbody>
+                {SEPARATE.map((r) => (
+                  <tr key={r.item} className="border-t">
+                    <td className="py-2.5 pr-3 font-medium text-igc-navy">{r.item}</td>
+                    <td className="py-2.5 pr-3">{r.price}</td>
+                    <td className="py-2.5 text-xs text-muted-foreground">{r.src}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-sm text-foreground/80">
+            업체가 셋으로 나뉘면 비용도 커지지만, 더 큰 문제는 <b className="text-igc-navy">서로의 결과를 모른 채 원서를 쓴다</b>는 점입니다.
+            T스쿨은 국내 수시·정시와 IGC를 한 팀이 함께 보고, 같은 생기부·성적·에세이 자료로 세 경로를 설계합니다.
+            국내 수시·정시 컨설팅을 함께 받을 때의 구성과 비용은 상담에서 안내합니다.
+          </p>
+          <Link to="/promo/parallel" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-igc-blue hover:gap-2">
+            수시·정시·IGC 병행 전략 보기 <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
