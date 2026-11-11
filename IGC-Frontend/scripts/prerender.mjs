@@ -18,7 +18,7 @@ const DIST = path.join(ROOT, "dist");
 const SSR_DIR = path.join(ROOT, "dist-ssr");
 const SITE_URL = (process.env.SITE_URL || "https://tigc.kr").replace(/\/+$/, "");
 
-const { render, PRERENDER_ROUTES } = await import(pathToFileURL(path.join(SSR_DIR, "entry-server.js")).href);
+const { render, PRERENDER_ROUTES, CONTENT_UPDATED, LLMS_TXT } = await import(pathToFileURL(path.join(SSR_DIR, "entry-server.js")).href);
 const template = await readFile(path.join(DIST, "index.html"), "utf8");
 
 // 브랜드 블록이 넣는 사이트 공통 태그 중 페이지마다 달라야 하는 것들 (og:image·site_name·JSON-LD 는 유지)
@@ -65,7 +65,6 @@ async function writePage(routePath, page) {
 }
 
 const NOW = Date.now(); // 모든 페이지 공통 렌더 시각 — #root data-ssr-time 으로 클라이언트 첫 렌더에 전달
-const today = new Date(NOW).toISOString().slice(0, 10);
 const problems = [];
 
 for (const route of PRERENDER_ROUTES) {
@@ -80,12 +79,15 @@ await writeFile(path.join(DIST, "index.html"), buildPage("/", home));
 
 if (problems.length) throw new Error(`프리렌더 실패:\n  ${problems.join("\n  ")}`);
 
+// 홈은 블로그 목록·마감일이 함께 보이므로 가장 최근 lastmod 를 따른다
+const HOME_LASTMOD = [CONTENT_UPDATED, ...PRERENDER_ROUTES.map((r) => r.lastmod).filter(Boolean)].sort().at(-1);
+
 // sitemap — 프리렌더 대상과 같은 목록에서 생성 (canonical 과 일치하는 URL만)
 const urls = [
-  { loc: `${SITE_URL}/`, lastmod: today },
+  { loc: `${SITE_URL}/`, lastmod: HOME_LASTMOD },
   ...PRERENDER_ROUTES.filter((r) => r.inSitemap !== false).map((r) => ({
     loc: `${SITE_URL}${r.path}`,
-    lastmod: r.lastmod || today,
+    lastmod: r.lastmod || CONTENT_UPDATED,
   })),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -95,6 +97,21 @@ ${urls.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod></ur
 `;
 await writeFile(path.join(DIST, "sitemap.xml"), sitemap);
 await writeFile(path.join(ROOT, "public", "sitemap.xml"), sitemap);
+
+// AI 검색용 요약 (llms.txt) — 사이트가 무엇이고 어떤 페이지가 정본인지 텍스트로 안내
+await writeFile(path.join(DIST, "llms.txt"), LLMS_TXT(SITE_URL));
+
+// 실제 404 — firebase.json rewrite 를 /promo/** 로 좁혔기 때문에, 그 밖의 없는 주소는 이 파일을 404 상태로 받는다
+await writeFile(
+  path.join(DIST, "404.html"),
+  `<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>페이지를 찾을 수 없습니다 | T IGC</title>
+<style>body{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;margin:0;padding:64px 20px;text-align:center;color:#1e2a4a;background:#fff}a{color:#2563eb}</style>
+</head><body><h1>페이지를 찾을 수 없습니다</h1><p>주소가 바뀌었거나 없는 페이지입니다.</p>
+<p><a href="/">T IGC 홈</a> · <a href="/promo/universities">IGC 5개 대학 비교</a> · <a href="/promo/consult">무료 상담 신청</a></p></body></html>
+`,
+);
 
 await rm(SSR_DIR, { recursive: true, force: true });
 console.log(`prerendered ${PRERENDER_ROUTES.length + 1} pages, sitemap ${urls.length} urls`);

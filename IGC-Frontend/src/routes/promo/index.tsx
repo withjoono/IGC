@@ -24,7 +24,7 @@ function Landing() {
     <>
       <Seo
         title="인천글로벌캠퍼스(IGC) 입시 정보·컨설팅"
-        description="IGC 5개 대학(스토니브룩·유타·조지메이슨·겐트·FIT) 전형·학과·2027 원서 마감일을 한눈에. 내신·어학 합격 가능성 진단과 무료 1:1 상담, IGC 멘토링."
+        description="인천글로벌캠퍼스 5개 대학(스토니브룩·유타·조지메이슨·겐트·FIT) 전형·학비·2027 마감일 정보와, 국내 수시·정시까지 한 팀이 함께 설계하는 IGC 입시 컨설팅. 첫 대학 98만원, 에세이 첨삭 포함."
         path="/"
       />
 
@@ -39,8 +39,8 @@ function Landing() {
             나머지 입시는 우리가 다 합니다.
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-            IGC는 수시 6회에 안 걸리는 보험 한 장 — 미리 들어두고 수시는 소신 지원하세요.
-            어학 성적이 없어도 수능영어·Versant 하나면 되고, 전형 선택부터 생기부 정리·에세이 첨삭·원서·마감까지 전부 맡아 드립니다.
+            인천글로벌캠퍼스(IGC)와 국내 수시·정시를 한 팀이 함께 설계합니다. IGC는 수시 6장·정시 3장 밖의 별도 지원이라
+            보험으로 깔아 두고, 국내 원서는 소신 있게 쓰세요. 전형 선택부터 생기부 정리·에세이 첨삭·원서·마감까지 전부 맡아 드립니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/promo/consult" className="inline-flex items-center gap-2 rounded-lg bg-igc-blue px-6 py-3 font-semibold text-white hover:bg-igc-navy">
@@ -59,7 +59,7 @@ function Landing() {
       <section className="container -mt-6">
         <StatBand items={[
           { value: "올인원", label: "전 과정 대행" },
-          { value: "수시 6회 밖", label: "보험 한 장" },
+          { value: "수시·정시·IGC", label: "한 팀이 함께 설계" },
           { value: "어학 6경로", label: "점수 없어도 OK" },
           { value: "학습·성적", label: "매달 관리" },
         ]} />
@@ -70,7 +70,7 @@ function Landing() {
         <div className="text-center">
           <p className="text-sm font-semibold text-igc-blue">WHY T스쿨 IGC</p>
           <h2 className="mt-1 text-2xl font-bold text-igc-navy md:text-3xl">맡기면 끝나는, 세 가지 이유</h2>
-          <p className="mt-2 text-muted-foreground">경쟁사는 원서 대행에서 끝납니다. 우리는 편리·실력·안전을 모두 드립니다.</p>
+          <p className="mt-2 text-muted-foreground">IGC 유학원은 IGC 원서에서, 입시 학원은 국내 원서에서 끝납니다. 우리는 둘 다 한 팀에서 합니다.</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           <Link to="/promo/english" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-blue/5 to-white p-6 transition hover:border-igc-blue hover:shadow-md">
@@ -89,10 +89,10 @@ function Landing() {
           </Link>
           <Link to="/promo/parallel" className="group rounded-2xl border-2 border-igc-blue/20 bg-gradient-to-br from-igc-navy/5 to-white p-6 transition hover:border-igc-navy hover:shadow-md">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-igc-navy/10 text-igc-navy"><ShieldCheck className="h-5 w-5" /></div>
-            <p className="mt-4 text-xs font-semibold text-igc-navy">③ 국내 수시 병행</p>
-            <h3 className="mt-1 text-lg font-bold text-igc-navy">수시 6회 밖 보험 한 장</h3>
-            <p className="mt-2 text-sm text-muted-foreground">IGC는 수시 6장에 안 들어갑니다. 보험 미리 확보하고 수시는 소신 지원하세요.</p>
-            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-navy group-hover:gap-2">수시 병행 전략 <ArrowRight className="h-3.5 w-3.5" /></span>
+            <p className="mt-4 text-xs font-semibold text-igc-navy">③ 국내 수시·정시 병행</p>
+            <h3 className="mt-1 text-lg font-bold text-igc-navy">수시·정시·IGC를 한 팀이</h3>
+            <p className="mt-2 text-sm text-muted-foreground">IGC는 수시 6장·정시 3장 밖. 유학원·수시 학원·정시 상담을 따로 다니지 않고, 한 팀이 세 경로를 함께 짭니다.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-igc-navy group-hover:gap-2">수시·정시 병행 전략 <ArrowRight className="h-3.5 w-3.5" /></span>
           </Link>
         </div>
       </section>

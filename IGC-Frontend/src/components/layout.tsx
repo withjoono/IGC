@@ -8,6 +8,15 @@ export const CONSULT_TEL = "tel:01025187139";
 // 카카오톡 채널 채팅 주소(예: "https://pf.kakao.com/_xxxxx/chat"). 비워 두면 카톡 버튼이 숨겨진다.
 export const KAKAO_CHANNEL_URL = "";
 
+// 푸터의 T스쿨 형제 사이트 링크 — 검색엔진·AI가 같은 운영사의 수시·정시·IGC 서비스로 묶어 이해하도록 상호 링크한다
+const FAMILY_SITES = [
+  { name: "T수시", desc: "국내 수시 지원 설계", url: "https://tsusi.kr/promo" },
+  { name: "T정시", desc: "정시 지원 전략", url: "https://tjungsi.kr/promo" },
+  { name: "스터디플래너", desc: "마감 역산 학습 계획", url: "https://studyplanner.kr/promo" },
+  { name: "모고모고", desc: "모의고사 성적 관리", url: "https://mogomogo.kr/promo" },
+  { name: "T스쿨", desc: "전체 서비스", url: "https://www.tskool.kr" },
+];
+
 export function Footer() {
   const year = new Date(useNow()).getFullYear();
   return (
@@ -44,6 +53,18 @@ export function Footer() {
             </div>
           </div>
         </div>
+        <nav aria-label="T스쿨 입시 서비스" className="mt-5 border-t border-foreground/10 pt-4">
+          <p className="text-center text-xs font-semibold text-igc-navy sm:text-left">T스쿨 입시 서비스 — 수시·정시·IGC를 한 계정으로</p>
+          <ul className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm sm:justify-start">
+            {FAMILY_SITES.map((f) => (
+              <li key={f.url}>
+                <a href={f.url} target="_blank" rel="noopener" className="text-muted-foreground transition-colors hover:text-igc-blue">
+                  <span className="font-medium text-foreground/80">{f.name}</span> · {f.desc}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="mt-4 border-t border-foreground/10 pt-2 text-center text-xs text-muted-foreground">
           © {year} (주)거북스쿨. All rights reserved.
         </div>

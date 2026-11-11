@@ -59,7 +59,7 @@ export const HEADER_GROUPS: HeaderGroup[] = [
 // 위 HEADER_GROUPS 메가메뉴와 각 페이지 본문 링크로 연결된다. 전화 상담은 전역 FloatingCall·푸터에 있다.
 export const HEADER_NAV: HeaderNavItem[] = [
   { href: "/promo/consulting", label: "올인원 서비스" },
-  { href: "/promo/parallel", label: "수시 병행" },
+  { href: "/promo/parallel", label: "수시·정시 병행" },
   { href: "/promo/igcclass", label: "IGC 멘토링", match: "prefix" },
   { href: "/promo/pricing", label: "컨설팅 비용" },
   { href: "/promo/blog", label: "블로그", match: "prefix" },
