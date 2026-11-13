@@ -44,9 +44,9 @@ npm run deploy:firebase   # npm run build && firebase deploy --only hosting:igc
 - 단계: 시크릿 존재 확인 → IGC 를 `IGC/` 에, `withjoono/Music_College` 의 `packages/satellite-header` 만 `Music_College/` 에 체크아웃(로컬과 같은 `../../Music_College` 구조, Sakwan 과 같은 방식) → `npm ci` → `npm run build` → **번들에 `localhost` 가 남으면 실패**(dev URL 유출 가드) → `google-github-actions/auth@v2` → `firebase deploy --only hosting:igc --project ts-front-479305`.
 - Music_College 는 **커밋 SHA 로 고정**돼 있다(`ref:`). 헤더를 바꿨으면 Music_College 에 먼저 푸시하고 워크플로의 `ref` 를 그 커밋으로 올린다.
 - 필요한 GitHub 시크릿 2개 — 없으면 첫 단계 `Check required secrets` 가 빠진 이름을 찍고 멈춘다.
-  - **`SATELLITE_HEADER_TOKEN`** — 비공개 리포 `withjoono/Music_College` 읽기 권한 토큰(fine-grained PAT, 해당 리포 Contents: Read-only). Sakwan 도 같은 이름을 쓴다.
+  - **`SATELLITE_HEADER_DEPLOY_KEY`** — Music_College의 읽기 전용 deploy key에 대응하는 IGC 전용 SSH 개인 키.
   - **`FIREBASE_SERVICE_ACCOUNT`** — `ts-front-479305` 에 Firebase Hosting 배포 권한이 있는 서비스 계정 JSON.
-  - 2026-11-02 `gh secret list -R withjoono/IGC` 실측: **둘 다 미등록.** 등록 전까지는 수동 `npm run deploy:firebase`. 등록: `gh secret set SATELLITE_HEADER_TOKEN -R withjoono/IGC` / `gh secret set FIREBASE_SERVICE_ACCOUNT -R withjoono/IGC < key.json`
+  - 두 Secret은 IGC 저장소의 Actions secrets에 저장한다. 키 원문은 저장소·로그에 남기지 않는다.
 - 동시 배포 방지: `concurrency: deploy-igc-front` (진행 중 배포 취소).
 - ⚠️ 로컬에서 `IGC-Frontend/node_modules` 를 통째로 지우지 말 것 — `@tskool/satellite-header` 링크를 따라가 **Music_College 원본 파일까지 지워진다**(2026-10-27 실제 발생, git 으로 복구). 지워야 하면 그 링크부터 따로 끊는다.
 
